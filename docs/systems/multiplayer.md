@@ -76,86 +76,98 @@ we already have, and balance becomes a permanent tax.
 
 </div>
 
-## The time model: derived from player activity {#time}
+## The time model: still open {#time}
 
-!!! success "Decided 2026-07-25"
-    **World speed is derived from what both players are doing, not set by hand.** Plus a
-    Total-War-style manual toggle that only applies when both players press it.
+!!! danger "REOPENED 2026-07-26. This is a blocking question again."
+    An activity-derived real-time clock was recorded as decided on 2026-07-25. It is **back open**:
+    the project owner is not sure real-time is right, and a **simultaneous-turn model** in the style
+    of *Total War: Warhammer 3* is now on the table as an equal candidate.
 
-The problem was that Bannerlord lets you control the clock and stops the world for battles, and
-neither survives two players. The answer isn't to give up time control: it's to make the game
-*infer* it. Time only accelerates when neither player would miss anything.
+    The earlier decision stays in the [Decision Log](../project/decisions.md) marked as reopened
+    rather than deleted, because the reasoning behind it is still worth having.
 
-### The table
+### This decision is smaller than it looks
 
-| State | World speed | Why |
-|---|---|---|
-| **Both players stationary** | **Paused** | Both are in menus, managing, or thinking. Nothing is being missed. |
-| **One player moving** | **1× (normal)** | One person is acting; the other shouldn't have the world yanked past them. |
-| **Both players moving** | **3× (fast)** | Both are travelling: this is exactly the dead time Bannerlord's fast-forward exists to skip. |
-| **Either player in a battle** | **1× (normal)** | Battles run 1:1 with the world clock. Non-negotiable: see below. |
+Worth saying first, because it makes the choice less frightening: **battles are real-time either
+way.** Total War is turn-based on the campaign map and real-time in the fight, which is exactly the
+split this game already has. So this is purely an **overworld-layer** decision. Nothing on
+[Horde Combat](../game/combat.md), [Unit System](../tech/unit-system.md) or the battle netcode
+changes whichever way it goes.
 
-On top of that: a **manual speed toggle in a shared HUD bar**, visible to both players, which applies
-only when **both** have it engaged. Reference: Total War: Warhammer's speed-up-turn-resolve button.
-This is the escape hatch for cases the derived rule gets wrong.
+<div class="opt" markdown>
 
-### Why battles must run 1:1 with the world clock
+### Option A: simultaneous turns (Total War: Warhammer 3)
 
-If the map ran at 3× while a fight ran at 1×, a 10-minute battle would consume 30 minutes of
-campaign time and your friend would have crossed the map. Forcing global 1× the moment anyone
-engages keeps one clock for everyone, and it produces a **legible reinforcement window**: the time
-your friend has to reach your fight is the same time you're experiencing inside it.
+Both players plan and move in the same turn. Each party has a **march range**, a movement budget it
+can spend. The turn resolves when both players commit, or a timer expires.
 
-It also creates a good social pressure: your friend fighting slows the world for you, which nudges
-you toward going to help rather than ignoring it.
+**For, and the first point is a big one:**
 
-**Reinforcement zone** scales with buffs, upgrades, and stronghold proximity, so extending how far
-and how long help can arrive becomes a progression axis of its own.
+- **It deletes the multiplayer time problem outright.** No shared clock, no speed negotiation, no
+  "what is my friend doing while I fight", no [tick-aligned timescale](../tech/netcode.md) risk. An
+  entire subsystem we designed stops needing to exist.
+- **Overworld netcode becomes trivial.** Send orders, resolve, sync at the turn boundary. No
+  continuous replication of a live world.
+- **Battle length stops mattering.** A 20-minute fight costs zero campaign time, so the 5-10 minute
+  budget we imposed on combat can relax.
+- **Save/load is trivial**, since state is clean at turn boundaries.
+- Thinking time is free. You can plan a poisoning campaign without the world running on.
 
-### Three problems this creates
+**Against:**
 
-!!! warning "OPEN: waiting must not be the same as idling"
-    "Stationary = paused" breaks **waiting as a strategy**. Camping on a road for a caravan, holding
-    outside a town, resting: all are things a player *deliberately* does while not moving, and all
-    would freeze time. **Needs an explicit `Wait` / `Camp` action that counts as activity** and lets
-    the clock run. Without it, ambushing is impossible.
+- **Feature 2 says "Bannerlord-like overworld", and Bannerlord is real-time.** This is the option
+  that most changes what was asked for.
+- **Turn-waiting friction is real and well documented** in Total War co-op campaigns. You wait on
+  your partner constantly.
+- **Day/night as a mechanic weakens**, since turns abstract time. The "undead are stronger at night"
+  idea gets much less interesting.
+- Reinforcement becomes a **range check at battle start** rather than a live ride to your friend's
+  fight. Not lost, but far less dramatic.
 
-!!! success "Hysteresis, solved structurally (2026-07-26)"
-    "Moving" is derived from **intent, not velocity**: a player is moving iff they have an **active
-    travel order** (route set / destination reached / `Wait`-`Camp` toggled are the only
-    transitions). Discrete events can't flicker, so there's nothing to tune: a short speed ramp
-    stays purely for feel. This also makes `Wait`/`Camp` fall out naturally as "an order that
-    counts as activity." See the [Decision Log](../project/decisions.md).
+</div>
 
-!!! danger "Netcode: time scale must be authoritative and tick-aligned"
-    A variable time scale is genuinely dangerous in a networked simulation. If each machine derives
-    the speed from its own local view, the two will transition on different frames and drift apart.
+<div class="opt" markdown>
 
-    **The rule: one machine computes the intended scale and broadcasts "scale becomes X at tick N".**
-    Never derive it locally on both. This is cheap to design in now and painful to retrofit: it
-    goes into [M4](../project/poc-scope.md) as a hard requirement. The tick→time mapping machinery
-    this needs (baseline anchoring + drift correction) already exists in OTR's `NetworkTickManager` -
-    see [OTR Carry-Over](../tech/otr-carryover.md).
+### Option B: real-time, activity-derived speed (Bannerlord)
 
-### Speeds
+The previously-recorded model. World speed is inferred from what both players are doing: both
+stationary pauses, one moving runs 1x, both moving runs 3x, and either player in a battle forces 1x.
+Plus a shared HUD toggle that only applies when both players engage it.
 
-**Paused / 1× / 3×.** Three states, no more. With derived speed and two players, extra tiers add
-confusion without adding control.
+**For:**
 
-### What this preserves that the old proposal gave up
+- **Matches Feature 2 literally**, and preserves the Bannerlord texture the pitch asked for.
+- **The marquee co-op moment survives**: you see your friend's fight on the map, you ride for it, you
+  arrive mid-battle as reinforcements.
+- **Day/night is real gameplay**, which gives the world clock a purpose.
+- No turn-waiting. Nobody is ever blocked on their partner clicking End Turn.
+- Interception on the road stays possible, which is good drama for a game about being hunted.
 
-The earlier recommendation was a fixed clock with no acceleration at all, which forced a small map
-and slow travel. The derived model keeps fast-forward, so **the map can be bigger and travel can be
-longer**: the boring parts compress themselves automatically. Route automation is still worth
-having, but it's no longer load-bearing.
+**Against:**
 
-Still true regardless: **battle length is a real budget** (a fight should resolve in ~5-10 minutes,
-because that's live campaign time for your friend), and **deep menu-diving has to go**: settlement
-interaction happens with the world live, so it must be doable in seconds.
+- Requires the whole derived-speed system, a `Wait`/`Camp` action so waiting is not idling, and a
+  **tick-aligned authoritative timescale** or the two machines drift apart.
+- **Battle length becomes a hard budget**, because a long fight is live campaign time for your
+  partner.
+- Settlement interaction must work with the world live, so no deep menu-diving.
+- Continuous overworld replication, which is more netcode than Option A by a wide margin.
 
-!!! tip "The model, in one line"
-    **2-player co-op + activity-derived world speed + battles forcing global 1×.** Time control
-    without negotiation, and fast-forward that can't skip anything anyone cares about.
+</div>
+
+### What each does to the campaign arc
+
+Worth weighing, since [the arc](progression.md) is now the spine of the game.
+
+**Acts 1 and 2 are sneaking, poisoning and scavenging.** Real-time suits the *sneaking* (avoiding
+patrols, timing a move) while turns suit the *poisoning* (act, end turn, come back later for the
+bodies). Neither is obviously right, and this is probably the sharpest test available: whichever
+model makes "one skeleton hiding in a cellar" more tense is the one to take.
+
+### Nothing has been chosen
+
+Both options are live. The [netcode](../tech/netcode.md) and
+[Campaign Overworld](../game/overworld.md) pages currently assume Option B and will need revising if
+Option A is chosen. That revision is contained, because it is the overworld layer only.
 
 ## Knock-on effects to work through
 

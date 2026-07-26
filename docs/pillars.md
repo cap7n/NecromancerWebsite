@@ -3,10 +3,21 @@
 The taste and constraints Necromancer is designed through. These are strong defaults, not laws, but
 break them on purpose, not by accident.
 
-!!! warning "OPEN: proposed, not ratified"
-    These pillars are a first draft written from the five stated features. They should be argued
-    with and edited before anything is built on top of them. A pillar nobody has pushed back on
-    hasn't earned its place.
+!!! success "Pillars 2, 3 and 4 are RATIFIED. Do not overwrite them."
+    Locked by the project owner on 2026-07-26. These three are **fixed**: a proposal that violates one
+    of them is wrong by default, and the correct response is to change the proposal, not the pillar.
+
+    If one ever genuinely needs revisiting, that is its own explicit decision with its own entry in
+    the [Decision Log](project/decisions.md). It never happens as a side effect of designing
+    something else.
+
+    **The other four remain open** and should still be argued with. A pillar nobody has pushed back
+    on hasn't earned its place.
+
+!!! note "Why those three, and not the others"
+    Worth noticing: 2, 3 and 4 are the pillars about **what the game is**. The rest are working
+    practice (1), an engineering constraint (5), a measured budget (6), and a readability rule (7).
+    Process and tech can bend as we learn. Identity should not.
 
 ## 1. Prototype the unproven thing, not the familiar thing
 
@@ -18,7 +29,7 @@ is building the parts we already know the answer to.
 
 See [Prototype Scope](project/poc-scope.md).
 
-## 2. The horde is a resource, not an army
+## 2. The horde is a resource, not an army <span class="pill done">RATIFIED</span>
 
 Every design decision should push toward *spending* undead rather than *preserving* them. If a
 system makes the player careful with individual skeletons, it's working against the fantasy. The
@@ -28,14 +39,27 @@ then punish the player somewhere *else*: in control, in upkeep, in the strategic
 
 Corollary: **losses must be replaceable in-fight**. See [Horde Combat](game/combat.md).
 
-## 3. The limit is Will, not headcount
+!!! note "The deliberate exception, which proves rather than breaks the rule"
+    [Lieutenants](game/combat.md#anchors-solve) are precious, persistent and mournable. That is not a
+    violation: this pillar governs the **horde**, and the chaff is free *precisely so* the anchors
+    can be the one thing you can lose. A game where nothing can be taken from you has no tension.
+
+## 3. The limit is Will, not headcount <span class="pill done">RATIFIED</span>
 
 Bannerlord limits you by party size and wages. Necromancer limits you by **how much you can
 control**. Units past your control ceiling don't vanish: they go **feral**, and feral undead are
 a genuine threat to everyone including you. This gives horde control its texture: the interesting
 decision isn't "do I have enough troops" but "am I still holding the leash."
 
-## 4. The living world is the supply chain
+Not to be confused with the ~800-agent figure in Pillar 6. That is a **technical budget**; this is a
+**design limit**. If the two are ever mistaken for each other, the design one wins.
+
+!!! note "Proposed mechanism: Devotion"
+    Will may be sourced from **living worshippers** rather than being an abstract stat. See
+    [Devotion](systems/economy.md#devotion). If adopted, it turns this pillar and Pillar 4 into rules
+    the game enforces mechanically rather than statements we have to keep honouring by hand.
+
+## 4. The living world is the supply chain <span class="pill done">RATIFIED</span>
 
 The necromancer's inputs come from the living: bodies, reagents, fear, labour. **Total victory over
 the living is economic suicide**, and the game should make that legible early. A player who
@@ -43,6 +67,19 @@ exterminates a region should feel the shortage. This is what makes the economy "
 just "longer": it's a predator/prey relationship, not a resource-gathering one.
 
 See [Economy](systems/economy.md).
+
+!!! warning "Act 4 has to be checked against this pillar"
+    [The campaign arc](systems/progression.md) ends with the player as a warlord fighting
+    coalitions. Taken naively, an endgame of conquest is **extermination**, which is exactly what
+    this pillar says is economic suicide.
+
+    So the endgame needs a shape that doesn't break it: domination that keeps the living producing,
+    a fixed end condition that arrives before you can strip the map, or a late-game
+    [necropolis](game/settlements.md) economy that genuinely replaces the parasitic one.
+
+    **The [Devotion](systems/economy.md#devotion) proposal solves this outright** by making
+    extermination a loss condition rather than a design tension. If it is adopted, this warning can
+    be closed.
 
 ## 5. Multiplayer is a design constraint, not a feature bolted on
 

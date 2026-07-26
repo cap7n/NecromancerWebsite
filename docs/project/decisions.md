@@ -366,6 +366,219 @@ result and the method in the wiki, and don't keep the harness as a foundation. M
 it answered "can GDScript hold 800 agents", found three bugs worth knowing about, and is now
 reference material rather than a codebase.
 
+## 2026-07-26 - Economy and settlements scoped down: deep in decisions, shallow in simulation
+
+**Decided:** **no simulated world economy.** No goods moving between towns, no supply and demand, no
+price curves, no trade routes. And settlements are **not** Bannerlord towns: no market inventory, no
+workshop production chains, no garrison roster, no arena, no tavern, no keep.
+
+**Why:** stated by the project owner. It also resolves a tension the wiki had been carrying: "deeper
+economy" is a stated requirement, but a *simulated* economy is complicated rather than deep. Most of
+its numbers are invisible, and the depth is claimed rather than felt. What makes an economy
+interesting is **choices that cost something**, and the parasitic loop already supplies that. One
+good tension beats twelve resource bars.
+
+**What a settlement is now:** three dials (Prosperity, Population, Dread) and a type
+(village / town / necropolis). If a number doesn't change a decision the player makes, it isn't in
+the model. Necropolis buildings capped at four, not a build tree.
+
+**Resources cut from five to three:** Corpses (perishable), Reagents (upkeep), Anima (rare, elites
+and player power). **Bone/Material folded into Corpses** as one conversion step too many. **Dread is
+no longer a carried resource**, it is a property of a place, which keeps the mechanic and removes a
+stockpile. Gold barely exists, since a lich cannot use a market.
+
+**What is deliberately kept:** the parasitic tension (the living are livestock, and killing a region
+kills your income), reagent upkeep as the army's running cost, Dread against Prosperity as the
+short-term-versus-long-term dial, and universal decay so the player acts rather than hoards.
+
+**Rules out:** trade as a buy-low-sell-high minigame. Trade is now about **maintaining illicit
+access** through fronts and black markets, which is more thematic and needs no price model.
+
+## 2026-07-26 - Lieutenants are anchors, and that settles the control scheme
+
+**Decided in principle** (implementation still open): a detachment operating away from the player
+needs something to hold its leash, and **a lieutenant projecting its own small aura is the primary
+answer**. Standards and decaying tethers stay as secondary options. Anchors owned equals detachments
+runnable.
+
+**Why it earns its place:** it resolves three problems that were being treated as separate.
+
+1. **The control UI.** The open risk was distinguishing "commanding the main body" from "commanding
+   a detachment" without a selection box. Anchors make it structural: **you never command units, you
+   command anchors.** Your body anchors the main body; each detachment has a lieutenant. The whole
+   control scheme becomes at most four addressable things, each with a position and a shape. Legible
+   from a third-person camera, and not an RTS selection model.
+2. **Enemy counter-play.** Kill the lieutenant and its detachment goes feral. The living AI needs one
+   instruction, *find the glowing one*, to be genuinely dangerous. A protect-the-VIP layer inside a
+   game about disposable bodies, with the counter-play falling out for free.
+3. **Something to lose.** The design insists the horde is expendable and losses should not hurt,
+   which is right, but taken alone produces a game where **nothing can be taken from the player**,
+   and no possible loss means no tension. Lieutenants are the deliberate exception: few, persistent,
+   expensive in Anima, mournable. **The chaff is free precisely so the anchors can be precious.**
+
+**Also falls out:** in co-op the second player's aura anchors units the same way, so two players
+divide the field with no additional systems.
+
+**Open under this:** what happens when a lieutenant dies (proposed: a grace period of degradation
+rather than instant feral, so there is a scramble rather than a cutscene), where lieutenants come
+from, and the name itself, which is a military word in a game that is not played straight.
+*Overseer*, *Foreman* or *Bailiff* fit the dark-comic register better.
+
+## 2026-07-26 - Regiments, addressed by hotkey, card and banner. RTS elements are fine.
+
+**Decided:** the horde is divided into a **small number of named regiments during deployment**, each
+with an [anchor](../game/combat.md#aura-control). Regiments are addressed three ways, layered:
+**hotkeys 1-4** (fast, always reliable), **cards** (state readout, especially proximity to feral),
+and **clicking the banner** carried by each anchor in the world.
+
+**Why, and a correction:** earlier drafts treated "RTS" as something to avoid on principle. That was
+defending a vocabulary rather than a constraint, and the project owner pushed back correctly: *"we
+can use RTS elements if they fit what we want to do."*
+
+The constraint that actually matters is **how many things the player can address and how fast they
+must switch**, not whether the widget resembles an RTS. Four regiments on hotkeys is a readable
+tactical layer. Forty is APM micro-management, which is a worse version of a game other studios
+already make well. **The number is the design; the widget is not.**
+
+**What assigning regiments pre-battle buys:** composition decisions happen in a calm moment rather
+than under pressure, and it gives the **deployment phase a purpose**, which had been an open
+question. Regiment count stays capped by anchors owned, so the limit still comes from the fiction.
+
+**The banner does three jobs at once**, which is usually a sign a design is holding together: it
+selects the regiment, it shows the player where their forces are in a field of near-identical bodies
+([Pillar 7](../pillars.md)), and it is the enemy's target, since killing an anchor sends its
+detachment feral. The living AI needs one instruction, *go for the banners*.
+
+**Still ruled out:** drag-selecting arbitrary subsets, per-unit micro, and drill controls (facings,
+spacing, formation shapes from a menu).
+
+## 2026-07-26 - The campaign arc: you start with one skeleton in a basement
+
+**Decided:** the game opens **small and hidden**, not with a horde.
+
+1. **The basement.** One skeleton, raised in a village cellar. You are pathetic and a single
+   militiaman would kill you. Verbs are quiet: rob a grave, poison a well, move a body.
+2. **The scavenger.** A dozen. You roam to find *other people's* battles and harvest the aftermath,
+   and poison villages to raise mortality for later.
+3. **The first holding.** You take a village. Undead become a **workforce**, rituals become possible
+   because you have a place, and your **first lieutenant is summoned at great cost**.
+4. **The warlord.** Regiments, detachments, open battle, coalitions forming against you.
+
+**Why it matters:** most of this wiki had been describing Act 4 as though it were the starting
+position. The arc earns that power fantasy instead of granting it, and it **doubles as the tutorial**
+with nothing bolted on: you learn the corpse economy when corpses are scarce, aura control when you
+can see all five of your units, and detachments only once you own an anchor.
+
+It also quietly answers [Q14](open-questions.md#q14). The player experiences 1, 10, 50 and 800 units
+in sequence, so "what reads as a horde" gets calibrated by playing rather than by us guessing.
+
+**Consequence:** the early game needs a **stealth and attrition layer** that the wiki did not
+previously have. Poisoning, grave-robbing, and scavenging old battlefields are Act 1 and 2 verbs,
+and they arrive before any combat design does.
+
+## 2026-07-26 - Lieutenants are summoned by ritual, not promoted from kills
+
+**Decided:** ritual summoning at great effort. Replaces the earlier proposal of raising them from
+named enemies the player had personally killed.
+
+**Why:** a ritual needs **a place**, so lieutenants are gated behind holding territory rather than
+combat luck. That ties your *tactical* ceiling to your *strategic* progress, which is the connection
+the campaign layer needs. It also makes the first one an event rather than a drop.
+
+**Players name their own.** Cheap, and it does real work: a named Overseer summoned at ruinous cost
+is something the player will actually mind losing, which is the role lieutenants exist to fill.
+
+## 2026-07-26 - Undead are a workforce, not only an army
+
+**Decided:** once you hold a settlement, undead **dig, haul, build and power rituals**.
+
+**Why it is more than flavour:** it puts the single resource under real tension. *Every skeleton
+digging is a skeleton not fighting.* Army size and economic output come from the same pool, which is
+a genuine strategic dial that costs nothing extra to build because the units already exist, and it
+gives the horde something to do between battles other than accrue upkeep.
+
+**Open:** granularity. *Recommend assigning whole regiments to labour*, so it reuses the regiment
+system rather than adding a parallel one.
+
+## 2026-07-26 - Feral is immediate, chaotic, and recoverable
+
+**Decided:** feral undead **spread out and attack everything with no cohesion**, hostile to the
+living, to the player, and to each other. **Walking your aura over them recovers them**; they get
+their master back and resume taking orders.
+
+**Why this beats the grace-period proposal it replaces:** the fail state becomes **a mess you go and
+clean up** rather than units deleted, so over-raising stays dangerous without being punishing. It
+creates a herding job in the middle of a battle, which is a genuinely novel thing for a player to be
+doing. And since feral units also attack the living, a horde that slips its leash is *uncontrolled*
+rather than *useless*.
+
+It also disposes of a separate open question: when a lieutenant dies, its detachment simply goes
+feral and scatters. The scramble to recover it is the drama, so no timer is needed.
+
+## 2026-07-26 - "No RTS" restated correctly: no overview camera, no per-unit micro
+
+**Decided:** the two things actually ruled out are the **battlefield overview camera** typical of the
+genre, and **per-unit micro-management**. RTS elements beyond those are available if they fit.
+
+**Why:** the earlier framing rejected "RTS" as a category, which was defending a vocabulary rather
+than a constraint. Correction from the project owner: *"By definition RTS is just real time strategy.
+The only thing that we are ruling out is the battlefield overview that typical RTSes have, and the
+per unit micro."*
+
+**The consequence worth designing around:** combat is commanded **from inside the fight**, in third
+person, so **the player cannot see their whole army.** That is not a limitation to work around, it is
+a feature to lean on. It makes [cards](../game/combat.md#addressing) important as a readout of what
+you cannot see, it makes banners the way you locate your own forces, and it means a detachment
+fighting out of sight is genuinely out of sight.
+
+## 2026-07-26 - Time model reopened: turn-based is back on the table
+
+**Reopened, not decided.** The activity-derived real-time clock recorded on 2026-07-25 is no longer
+settled. **Simultaneous turns** with a march range, as in *Total War: Warhammer 3*, is an equal
+candidate.
+
+**Why record a reopening at all:** the house rule says a wiki records decisions rather than replacing
+them, and quietly editing a decision away is how a design doc starts lying about its own history. The
+original entry stays above, marked.
+
+**The useful framing:** battles are real-time in both options, so this is an **overworld-layer**
+decision only. Nothing in [combat](../game/combat.md), the [unit system](../tech/unit-system.md) or
+battle netcode is affected. Turn-based would delete an entire subsystem we had designed (derived
+speed, `Wait`/`Camp`, tick-aligned authoritative timescale) and make overworld netcode trivial, at
+the cost of the Bannerlord texture Feature 2 asked for, weaker day/night, and turn-waiting friction.
+
+**Affected if turns win:** [Netcode](../tech/netcode.md) and
+[Campaign Overworld](../game/overworld.md) both currently assume real-time and would need revising.
+Contained, since it is the overworld layer only.
+
+## 2026-07-26 - Pillars 2, 3 and 4 are ratified and locked
+
+**Decided:** three [design pillars](../pillars.md) are now **fixed**, at the owner's instruction:
+
+2. **The horde is a resource, not an army.**
+3. **The limit is Will, not headcount.**
+4. **The living world is the supply chain.**
+
+**What "locked" means in practice:** a proposal that violates one of these is wrong by default, and
+the fix is to change the proposal rather than the pillar. Revisiting one is its own explicit decision
+with its own entry here. It never happens as a side effect of designing something else.
+
+**Worth noticing which three these are.** They are the pillars about *what the game is*. The
+remaining four are working practice (1), an engineering constraint (5), a measured budget (6) and a
+readability rule (7). Process and tech can bend as we learn; identity should not. Those four stay
+open to argument.
+
+**Two consistency checks this immediately surfaced**, both now flagged on the pillars page:
+
+- **Lieutenants versus Pillar 2.** Not a violation. Pillar 2 governs the *horde*, and the chaff is
+  free precisely so the anchors can be the one thing the player can lose.
+- **Act 4 versus Pillar 4.** [The arc](../systems/progression.md) ends with the player as a warlord
+  fighting coalitions, and an endgame of conquest is extermination, which Pillar 4 calls economic
+  suicide. The endgame needs a shape that survives the pillar: domination that keeps the living
+  producing, an end condition that arrives before the map is stripped, or a necropolis economy that
+  genuinely replaces the parasitic one. **Open, and exactly the kind of thing normally discovered too
+  late.**
+
 ---
 
 !!! note "What's still open"

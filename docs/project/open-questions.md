@@ -21,15 +21,28 @@ Legend: <span class="pill risk">BLOCKING</span> decide before any code
 *Still open under this:* whether the design should later stretch to 3-4 players. Nothing should be
 built that makes it impossible, but 2 is the target.
 
-## Q2. What happens to overworld time when one player is in a battle? <span class="pill done">DECIDED</span> {#q2}
+## Q2. Turn-based or real-time overworld? <span class="pill risk">BLOCKING</span> {#q2}
 
-**World speed is derived from player activity.** Both stationary → paused; one moving → 1×; both
-moving → 3×; either in battle → forced 1×. Plus a shared HUD toggle that applies only when both
-players engage it. See [Multiplayer & Time](../systems/multiplayer.md#time).
+**Reopened 2026-07-26.** An activity-derived real-time clock was recorded as decided on 2026-07-25;
+it is open again, with **simultaneous turns** (Total War: Warhammer 3 style, with a march range) now
+an equal candidate.
 
-*Three things still open under this:* an explicit `Wait`/`Camp` action so waiting isn't the same as
-idling; hysteresis so the speed doesn't judder; and making the time scale authoritative and
-tick-aligned so the two machines don't drift.
+**Smaller than it looks:** battles are real-time either way, so this is an **overworld-layer**
+decision only. Nothing in combat, the unit system, or battle netcode changes.
+
+**Option A, simultaneous turns.** Deletes the multiplayer time problem outright: no shared clock, no
+speed negotiation, no tick-aligned timescale risk, and trivial overworld netcode. Battle length stops
+mattering. Costs the Bannerlord texture Feature 2 asked for, weakens day/night, adds turn-waiting
+friction, and reduces reinforcement to a range check.
+
+**Option B, real-time with derived speed.** Matches Feature 2, keeps the ride-to-your-friend's-battle
+moment and day/night as real mechanics, nobody waits on anybody. Costs a whole derived-speed
+subsystem, a hard battle-length budget, and continuous overworld replication.
+
+**Sharpest test available:** whichever makes [Act 1](../systems/progression.md) more tense, one
+skeleton hiding in a cellar, is probably the right answer.
+
+-> [Multiplayer & Time](../systems/multiplayer.md#time)
 
 ## Q3. What is the actual horde-control verb set? <span class="pill risk">BLOCKING</span> {#q3}
 

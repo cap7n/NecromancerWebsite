@@ -187,8 +187,8 @@ minute with the world live.
 **H3. Map-level panel, or walkable scene?** *Recommend: panel for the PoC. Walkable towns are a huge
 content cost for a player who can't be seen in public.*
 
-**H4. Which necropolis buildings?** Proposed: charnel works, reagent gardens, barrow-vaults,
-soul-well/obelisk, garrison.
+**H4. Which necropolis buildings?** Proposed, capped at four: charnel works, reagent vats,
+barrow-vault, obelisk. *Not a build tree.*
 
 **H5. Are there named contacts?** A corrupt undertaker, a cult cell, a desperate lord?
 
@@ -196,7 +196,8 @@ soul-well/obelisk, garrison.
 
 ## I. Economy <span class="pill wip">SOON</span>
 
-**I1. Confirm the five resources?** Corpses · Bone/Material · Reagents · Anima · Dread.
+**I1. Confirm the three resources?** Corpses (perishable) · Reagents (upkeep) · Anima (rare). Dread
+is a property of a settlement rather than something you carry. *Cut from five on 2026-07-26.*
 
 **I2. How does the player get reagents?** Fronts and black markets are proposed: is that the main
 trade minigame?
@@ -218,7 +219,9 @@ asymmetric access so trading is worthwhile rather than optional.*
 **J1. Cult or clan?** *Recommend: cult. Lieutenants by corruption, cells instead of vassals, no
 marriage/diplomacy layer.*
 
-**J2. How are lieutenants recruited?**
+**J2. ~~Where do lieutenants come from?~~** <span class="pill done">ANSWERED</span> Summoned by
+ritual at great effort, gated behind holding territory. Players name their own. What does a summoning
+ritual actually *cost*, and does it need a specific building?
 
 **J3. Campaign length, and is there an end condition?** Or sandbox?
 
@@ -229,6 +232,11 @@ marriage/diplomacy layer.*
 ---
 
 ## K. Multiplayer <span class="pill wip">SOON</span>
+
+**K0. Turn-based or real-time overworld?** <span class="pill risk">BLOCKING</span> Simultaneous turns
+with a march range (TWWH3) versus real-time with activity-derived speed (Bannerlord). Battles are
+real-time either way, so this is the overworld layer only. See
+[Q2](open-questions.md#q2). *No recommendation: both have a real case.*
 
 **K1. Confirm the `Wait`/`Camp` action** so waiting isn't idling? *(Required, without it, ambushing
 is impossible.)*

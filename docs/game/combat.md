@@ -95,25 +95,74 @@ walking out of your control.
 
 That is the constraint to build on, not to design away. Something has to hold the leash:
 
+<div class="opt rec" markdown>
+
+### A lieutenant, the primary answer
+Projects a small aura of its own. Already in [the roster](horde.md), and it makes lieutenants
+**tactically essential rather than merely strong**, which is a far better reason to want one.
+
+</div>
+
 <div class="opt" markdown>
 
-### A lieutenant
-Projects a small aura of its own. Already in [the roster](horde.md), and this makes lieutenants
-**tactically essential rather than merely strong**, which is a much better reason to want one.
-
 ### A planted standard, totem or grave-stake
-A weaker fixed aura at a spot you choose. Cheap, expendable, and **destructible by the enemy**,
-which hands the living a smart thing to do.
+A weaker fixed aura at a spot you choose. Cheap, expendable, **destructible by the enemy**. Useful
+for holding ground you have already taken.
 
 ### A decaying tether
-No anchor at all. The detachment slowly slips toward feral on a timer. Good for a short strike,
-useless for holding ground.
+No anchor at all. The detachment slips toward feral on a timer. Fine for a short strike, useless for
+holding anything.
 
 </div>
 
 **The number of anchors you own is the number of detachments you can run.** That cap comes from the
-fiction rather than from a UI restriction, it is a natural progression axis, and it keeps
+fiction rather than a UI restriction, it is a natural progression axis, and it keeps
 [Pillar 3](../pillars.md) intact: the limit is control, never headcount.
+
+### Three things this solves at once {#anchors-solve}
+
+Promoting lieutenants to anchors turns out to answer questions we were treating as separate.
+
+**1. It solves the control UI.** The open risk was *"am I commanding the main body or a detachment?"*
+With anchors the answer is structural:
+
+> **You never command units. You command anchors.**
+
+Your body anchors the main body. Each detachment has a lieutenant. So the entire control scheme is
+**at most four things you can address**, each with a position and a shape, reached by hotkey, card or
+[banner](#addressing). A small fixed set of pieces, legible from a third-person camera.
+
+**2. It gives the enemy something intelligent to do.** Kill the lieutenant and its detachment starts
+going feral, which means turning on whatever is nearest. The living AI does not need to be clever to
+be dangerous, it needs one instruction: **find the glowing one**. Suddenly there is a protect-the-VIP
+layer inside a game about disposable bodies, and the counter-play writes itself.
+
+**3. It gives the player something to lose.** This is the one that matters most.
+
+The whole design says the horde is expendable, losses do not hurt, and you should throw bodies at
+problems. That is correct, but taken alone it is also a game where **nothing can be taken from you**,
+and a game with no possible loss has no tension. Lieutenants are the exception that makes the rule
+work: few, persistent across battles, expensive in [Anima](../systems/economy.md), and genuinely
+mournable. The chaff is free precisely so the anchors can be precious.
+
+!!! success "DECIDED: when a lieutenant dies, its detachment goes feral"
+    No grace period and no timer. The detachment scatters and attacks everything, and you recover it
+    by walking your aura over it. See [the feral question](#the-feral-question).
+
+!!! note "Naming: players name their own"
+    "Lieutenant" is a placeholder, and a military word in a game that is
+    [not](../tech/art-direction.md) played straight. *Overseer*, *Foreman* and *Bailiff* fit the
+    undead-middle-management register better.
+
+    **Players name their own**, which is cheap to build and does real work: a named Overseer you
+    summoned at ruinous cost is something you will actually mind losing.
+
+### Your co-op partner is an anchor too
+
+A second player's aura holds units exactly the way yours does, so **two players naturally divide the
+field with no extra systems**. It also means their death, or their wandering off, has consequences
+for units near them. Worth confirming rather than discovering: see
+[the feral question](#the-feral-question).
 
 ### Line-drawing works for both
 
@@ -134,9 +183,79 @@ Affordable, but it argues for a **cap of 3 or 4 detachments**, which is the same
 limit suggests. Two independent constraints landing on the same figure is usually a sign the design
 is coherent.
 
-**Two control contexts is the real UI risk.** "Am I commanding the main body or a detachment?" has to
-be answerable at a glance without a selection UI, or this slides into the RTS we are trying not to
-build. That is the thing to prototype, not the maths.
+**Two control contexts is the real UI risk**, and it is a UI problem rather than a maths problem.
+See below.
+
+## Addressing regiments {#addressing}
+
+!!! success "Position corrected 2026-07-26"
+    Earlier drafts of this page treated "RTS" as a thing to avoid on principle. That was wrong, and
+    it was defending a vocabulary rather than a constraint. **RTS elements are tools. Use the ones
+    that fit.**
+
+    The constraint that actually matters is not whether the UI looks like an RTS. It is:
+
+    > **How many things can the player address, and how fast must they switch between them?**
+
+    Four addressable groups is a readable tactical layer. Forty is APM micro-management, which is a
+    worse version of a game other people already make well. The number is the design, not the widget.
+
+### Regiments, assigned before the battle
+
+The horde is divided into a **small number of named regiments** during deployment, not mid-fight.
+Each regiment gets an [anchor](#aura-control): your own body for the main body, a lieutenant or a
+standard for each detachment.
+
+Doing it before the fight is worth it on its own:
+
+- Composition decisions happen in a calm moment rather than under pressure.
+- It gives the **deployment phase an actual purpose**, which was previously an open question.
+- Regiment count is capped by anchors you own, so the cap comes from the fiction rather than a
+  UI limit.
+
+### Three ways to address one, layered
+
+Not alternatives. Each covers a case the others miss.
+
+<div class="opt rec" markdown>
+
+### Hotkeys (1 to 4)
+Fastest and the only one that is always reliable. No aiming, no visibility requirement, works while
+the camera is pointed elsewhere. This is the one that has to feel good.
+
+### Cards
+A small bar showing each regiment's state at a glance: strength, what it is doing, and **how close it
+is to going feral**. Clickable, but its real job is *readout* rather than input. This is where the
+[state machine](../tech/unit-system.md) becomes visible to the player.
+
+### Banners, clicked in the world
+Diegetic and the best-feeling of the three. Each anchor carries a standard visible above the mass, so
+you click the thing itself instead of a widget. Needs the banner to be visible, which is why it is
+layered on top of hotkeys rather than replacing them.
+
+</div>
+
+### No overview camera
+
+Combat is commanded **from inside the fight**, in third person. There is no god-view.
+
+That is the real constraint behind "not an RTS", and it is worth leaning on rather than working
+around: **the player cannot see their whole army.** Cards become a readout of what you cannot see,
+banners become how you locate your own forces across a field, and a detachment fighting out of sight
+is genuinely out of sight. Uncertainty about your own army is a mechanic, not a UI failure.
+
+### The banner is doing three jobs at once
+
+Worth noticing, because it is the sort of overlap that means a design is holding together:
+
+1. **It is how you select the regiment.**
+2. **It is how you read where your forces are** across a field of near-identical bodies, which is
+   [Pillar 7](../pillars.md).
+3. **It is the enemy's target.** A banner marks the anchor, and killing the anchor sends the
+   detachment feral. The living AI needs one instruction, *go for the banners*, to be genuinely
+   dangerous.
+
+Tattered standards over a shambling mass is also just the right image for the game.
 
 ## The Will system
 
@@ -149,10 +268,23 @@ Per [Pillar 3](../pillars.md), the cap isn't headcount, it's **Will** (working n
 - Over-raising is therefore self-limiting and *dramatic* rather than a greyed-out button. The
   greedy play is available and it bites.
 
-!!! warning "OPEN: the feral question" {#the-feral-question}
-    Feral units attacking allies is thematically perfect and could be miserable in practice
-    (griefing, unfun deaths). Alternatives: feral units simply stop and rot, wander off, or become
-    neutral to everyone. **Needs a prototype answer, not an argument.**
+!!! success "DECIDED 2026-07-26: feral is chaotic but recoverable" {#the-feral-question}
+    Feral undead **spread out and attack everything with no cohesion.** No formation, no orders, no
+    discrimination. They are a hazard to the living, to you, and to each other.
+
+    **But they are not lost.** Walk your aura over them and they get their master back and start
+    taking orders again. Under the [Devotion proposal](../systems/economy.md#devotion) that recovery
+    **costs**, which means an empty pool leaves them permanently hostile: the difference between a
+    mess you clean up and a mess that is now hunting you.
+
+    This is better than the grace-period proposal it replaces, and simpler. The fail state is **a
+    mess you go and clean up**, not units deleted from your roster, so over-raising stays dangerous
+    without being punishing. It creates a herding job in the middle of a battle, which is a genuinely
+    novel thing to be doing. And because feral units attack the *living* too, a horde that slips its
+    leash is uncontrolled rather than useless.
+
+    It also disposes of the "what happens when a lieutenant dies" question: its detachment goes feral
+    and scatters, and you recover it by going there. The scramble is the recovery, not a timer.
 
 ## Where the player stands
 
@@ -192,9 +324,11 @@ are orthogonal.** See [scattered slots](../tech/performance.md#scattered-slots).
 
 ## What we are *not* doing
 
-- No unit selection boxes. You never click an individual skeleton.
+- **No drag-selecting arbitrary subsets.** You address whole regiments, never individual skeletons,
+  and the roster is fixed before the fight rather than assembled during it.
 - No drill: no facings, no spacing controls, no shieldwall/wedge/square menu.
-- No per-unit micro. If it rewards APM it's the wrong game.
+- **No APM.** The test is not whether a control looks like an RTS, it is whether playing well
+  requires clicking fast. Four regiments addressed by hotkey does not. Forty does.
 - No morale-driven rout for the undead. **The dead don't flee**: that's their whole advantage, and
   the living enemy's routing is the contrast that sells it.
 

@@ -39,9 +39,22 @@ Bought with [Anima](../systems/economy.md), scarce by construction.
   something of who they were. Persistent, upgradeable, mournable.
 - **Bone Colossi**: built from Bone, siege-scale, slow. The "big spend."
 - **Wraiths / Shades**: incorporeal, ignore terrain, terrify the living. Anti-morale, not anti-armour.
-- **Necromancer lieutenants**: living or undead casters who project their own small control aura.
-  **Critically: they extend the horde's leash**, which makes them tactically essential rather than
-  just strong. In co-op, another player fills this role naturally.
+- **Lieutenants** *(placeholder name, players rename their own)*: the most important elite in the
+  game. Each projects its own small control aura, which is what lets a **detachment** operate away
+  from you. See [the anchor model](combat.md#aura-control).
+
+    **They are summoned by ritual at great effort**, not promoted from battlefield kills, which
+    gates them behind holding territory rather than combat luck. See
+    [the campaign arc](../systems/progression.md#lieutenant-origin).
+
+    They are deliberately the exception to everything else on this page: **few, persistent across
+    battles, expensive in [Anima](../systems/economy.md), and losable.** In a design where all the
+    chaff is disposable, lieutenants are the only thing that can actually be taken from you, which
+    is what keeps the game from having no stakes at all.
+
+    Consequences worth designing for: killing one is the enemy's best play, so they need protecting;
+    the number you own caps how many detachments you can run; and in co-op the other player is an
+    anchor too, so two players divide the field for free.
 
 ## Decay and upkeep
 

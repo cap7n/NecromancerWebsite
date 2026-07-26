@@ -2,83 +2,78 @@
 
 **Feature 4: villages and towns like Bannerlord, necromancer-themed.**
 
-!!! warning "OPEN, nothing here is decided"
-    [Q6](../project/open-questions.md#q6) is the blocking question: do you *conquer* settlements or
-    *parasitise* them?
+!!! success "Scoped down 2026-07-26"
+    Bannerlord towns carry a garrison, a market, workshops, a keep, an arena and a tavern. **We are
+    not building that.** A settlement here is a small number of dials and a short list of things you
+    can do to it. See the [Decision Log](../project/decisions.md).
 
-## Bannerlord's model, briefly
+## What a settlement actually is
 
-Villages produce goods and recruits and feed a bound town. Towns have prosperity, a garrison, a
-market, workshops, a keep, an arena, a tavern. Castles gate regions. You take them by siege, hold
-them as fiefs, and they generate income and troops.
+Three numbers and a type. That is the whole model.
 
-The necromancer version has to answer: **what does a settlement do for someone who doesn't want
-subjects, doesn't eat, and can't shop?**
+| Dial | Meaning | Moves when |
+|---|---|---|
+| **Prosperity** | How much the place produces, and how fast its graveyard refills | You extort it, plague it, or leave it alone to recover |
+| **Population** | How many bodies exist here, eventually | Births, plague, famine, your raids |
+| **Dread** | How cowed it is | You do something visible and awful nearby. Decays on its own |
 
-## The two modes
+No market inventory. No workshop production chains. No garrison roster to manage. If a number
+doesn't change a decision the player makes, it isn't in the model.
 
-<div class="opt rec" markdown>
+**Settlement types:** village (small, feeds a town), town (the regional node), and necropolis (one
+you have converted). Castles are out unless sieges come back.
 
-### Mode 1: Parasitise (the early game) · **recommended default**
+## What you can do to one
 
-The settlement stays alive and human. You extract from it without owning it:
+Every verb has to be doable in under a minute with the world clock live.
 
-- **Tribute**: coerced with [Dread](../systems/economy.md), no siege needed.
-- **Graveyard harvesting**: the cemetery is a finite, slowly-refilling node. Raiding it is fast
-  income and enormous Dread cost.
-- **Fronts**: a corrupted merchant, an undertaker on the payroll, a cult cell in the slums. Your
-  only legal-ish access to reagents and markets.
-- **Plague / curse**: deliberately raise mortality. Produces corpses *passively* and permanently
-  damages prosperity. The purest expression of the economy's central tension.
+### Parasitise, the default
 
-A parasitised settlement keeps producing. Push too hard and it collapses, and a dead village
-produces nothing ever again.
+- **Extort tribute.** Costs Dread, gives resources, lowers Prosperity a little.
+- **Raid the graveyard.** A burst of corpses from a finite pool that refills with Prosperity.
+  Enormous Dread cost, and it is the loudest thing you can do.
+- **Spread plague.** Raises mortality over time, so corpses accrue passively. Permanently damages
+  Prosperity. The purest expression of the economy's central tension.
+- **Run a front.** One corrupted contact in the settlement gives you access to buy
+  [reagents](../systems/economy.md). Discoverable and burnable by the enemy.
 
-</div>
+A parasitised settlement keeps producing forever. Push too hard and it collapses, and **a dead
+village produces nothing ever again.**
 
-<div class="opt" markdown>
+### Convert to a necropolis, the late game
 
-### Mode 2: Convert to a Necropolis (the late game)
+One-way and expensive. The living population is consumed. The place stops producing food, recruits
+and Prosperity, and starts producing for you instead.
 
-You take it and remake it. **One-way and expensive.** The living population is consumed, and the
-settlement stops producing food/recruits/prosperity and starts producing Bone, Reagents, and
-undead capacity instead.
+Buildings are deliberately few. Proposed, not decided:
 
-- **Charnel works**: corpses → Bone at scale.
-- **Reagent gardens / alchemical vats**: the only self-sufficient reagent source, so late-game
-  independence from living markets is *earned*.
-- **Barrow-vaults**: stored, dormant units you can wake instantly. Strategic reserve.
-- **A soul-well / obelisk**: extends the player's control aura or Will pool regionally.
-- **Garrison**: undead don't need pay, but they need reagents. A big garrison is a permanent drain.
+- **Charnel works.** Corpses into durable material at scale.
+- **Reagent vats.** The only self-sufficient reagent source, so late-game independence from living
+  markets is *earned*.
+- **Barrow-vault.** Dormant units you can wake instantly. A strategic reserve, and the thing that
+  makes territory worth holding.
+- **Obelisk.** Extends your control aura or Will pool regionally.
 
-Converting is a **strategic wound to your own economy**: you've turned a renewable corpse farm into
-a factory. Doing it too early starves you. That's the decision that makes the system interesting,
-and it needs to be visible and painful.
+Four, not a build tree. Converting is a **strategic wound to your own economy**: you have turned a
+renewable corpse farm into a factory. That decision is the interesting part, so it should be visible
+and painful.
 
-</div>
-
-**Recommendation: both, staged.** Parasitise early, convert late, conversion permanent. It gives
-the campaign a natural arc: hidden predator → open warlord, without needing a scripted story.
+**Recommendation: both, staged.** Parasitise early, convert late, conversion permanent.
 
 ## The visit experience
 
-With [no pausing](../systems/multiplayer.md#time), Bannerlord-style deep menu-diving in settlements
-is out. Whatever a settlement visit is, it has to be doable **live, in under a minute**, or be
-something you set going and walk away from.
-
-Working assumption: settlements are **map-level interactions with a compact panel**, not walkable
-3D scenes, at least for the PoC. Walkable towns are a huge content cost and buy little for a player
-who can't be seen in public anyway.
+A **map-level panel**, not a walkable scene. A necromancer cannot be seen in public, so a walkable
+town buys very little for a large content cost.
 
 !!! warning "OPEN"
-    Walkable settlement scenes are a real question for the full game (they're much of what people
-    love about Bannerlord). Deferred, not rejected: see [Backlog](../project/backlog.md).
+    Walkable settlements are much of what people love about Bannerlord. Deferred, not rejected. See
+    the [Backlog](../project/backlog.md).
 
-## Living-faction response
+## How the living respond
 
-Settlements should react to you: evacuate cemeteries, hire mercenaries, wall up, burn their own
-dead. **Burning the dead is the key counter-verb**: it attacks the [combat loop](combat.md)
-directly and gives the living AI something smart to do.
+Settlements react rather than sit still: evacuate the cemetery, hire mercenaries, wall up, and
+**burn their own dead**. That last one is the key counter-verb, because it attacks the
+[combat loop](combat.md) directly rather than just fielding more soldiers.
 
 ## Related
 
