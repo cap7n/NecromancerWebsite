@@ -1,0 +1,67 @@
+site_name: Necromancer Design Wiki
+site_url: https://cap7n.github.io/necromancer-docs/
+site_description: Design wiki and single point of truth for Necromancer, a multiplayer necromancy campaign game — Bannerlord-style overworld, horde-control combat.
+repo_url: https://github.com/cap7n/necromancer-docs
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  palette:
+    scheme: slate
+    primary: deep purple
+    accent: light green
+  font:
+    text: Inter
+    code: JetBrains Mono
+  features:
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - search.suggest
+    - search.highlight
+    - content.action.edit
+    - toc.follow
+
+markdown_extensions:
+  - admonition
+  - tables
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+extra_css:
+  - stylesheets/extra.css
+
+nav:
+  - Home: index.md
+  - Design Pillars: pillars.md
+  - ❓ Open Questions: project/open-questions.md
+  - 📋 Design Questionnaire: project/questionnaire.md
+  - The Game:
+      - The Necromancer (Player): game/necromancer.md
+      - Campaign Overworld: game/overworld.md
+      - Horde Combat: game/combat.md
+      - The Horde (Units): game/horde.md
+      - Settlements: game/settlements.md
+  - Systems:
+      - Economy: systems/economy.md
+      - Multiplayer & Time: systems/multiplayer.md
+      - Progression: systems/progression.md
+  - Tech:
+      - Engine & Tooling: tech/engine.md
+      - Horde Scale & Performance: tech/performance.md
+      - Unit System Design: tech/unit-system.md
+      - Netcode Architecture: tech/netcode.md
+      - OTR Carry-Over: tech/otr-carryover.md
+      - Art Direction: tech/art-direction.md
+  - Project:
+      - Prototype Scope (PoC): project/poc-scope.md
+      - Backlog: project/backlog.md
+      - Decision Log: project/decisions.md
+      - Roadmap & Priorities: project/roadmap.md
+      - How to Edit This Wiki: project/how-to-edit.md
