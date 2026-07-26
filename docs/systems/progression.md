@@ -1,6 +1,6 @@
 # Progression
 
-!!! warning "OPEN — sketch only"
+!!! warning "OPEN: sketch only"
     Lowest-priority system at concept stage. Recorded here so it doesn't get invented accidentally
     while building something else.
 
@@ -20,7 +20,7 @@ co-op players non-interchangeable.
 - **No level-up stat inflation.** Undead shouldn't get numerically better; the player should get
   *new options*. Numbers going up fights [Pillar 2](../pillars.md) by making individual units precious.
 - **Anima spends are irreversible.** Rare currency + permanent choice = a build.
-- **The best power-ups extend control, not damage.** More Will, wider aura, lieutenants — because
+- **The best power-ups extend control, not damage.** More Will, wider aura, lieutenants, because
   those are what change how [combat](../game/combat.md) plays rather than how fast it ends.
 
 ## Open

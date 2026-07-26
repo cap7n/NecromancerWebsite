@@ -18,6 +18,6 @@ Open http://127.0.0.1:8000. See [How to Edit This Wiki](docs/project/how-to-edit
 
 ## Status
 
-The project is at **concept stage**. Almost nothing here is decided — most pages lay out
+The project is at **concept stage**. Almost nothing here is decided: most pages lay out
 the option space and are marked as open. The master list of what needs deciding is
 [Open Questions](docs/project/open-questions.md).

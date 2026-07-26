@@ -1,4 +1,4 @@
-/* Necromancer Design Wiki — dark crypt polish + status pills.
+/* Necromancer Design Wiki: dark crypt polish + status pills.
    Mirrors the TowerDrop wiki styling, shifted violet/bone. */
 
 /* Deepen the slate (dark) background toward a near-black, violet-tinted void. */
@@ -19,7 +19,7 @@
 }
 
 /* -----------------------------------------------------------------
-   Status pills — used in the backlog legend and on every item.
+   Status pills: used in the backlog legend and on every item.
    Usage in markdown:  <span class="pill wip">WIP</span> ...
    ----------------------------------------------------------------- */
 .pill {
@@ -41,8 +41,8 @@
 .pill.parked{ background: #44506633; color: #8fa3c4; }  /* shelved / deferred */
 
 /* -----------------------------------------------------------------
-   Option blocks — for pages that lay out A/B/C design choices.
-   Usage:  <div class="opt" markdown> ### Option A — ... </div>
+   Option blocks: for pages that lay out A/B/C design choices.
+   Usage:  <div class="opt" markdown> ### Option A, ... </div>
    ----------------------------------------------------------------- */
 .opt {
   border-left: 3px solid #5b46b9;
@@ -53,7 +53,7 @@
 .opt .md-typeset h3,
 .opt h3 { margin-top: 0.4em; }
 
-/* Requirement provenance — MUST came from the designer, PROPOSED is a suggestion
+/* Requirement provenance: MUST came from the designer, PROPOSED is a suggestion
    awaiting sign-off. Keeping these visually distinct is the house rule made
    visible: never let a proposal read as a decision. */
 .pill.must { background: #8a5a0033; color: #f2b64a; }

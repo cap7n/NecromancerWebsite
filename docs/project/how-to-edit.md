@@ -53,13 +53,13 @@ Then open `http://127.0.0.1:8000`. Auto-reloads as you edit.
 
 `note`, `tip`, `warning`, `bug`, `danger` all work as box types.
 
-- Status pills: `<span class="pill todo">TODO</span>` — types are
+- Status pills: `<span class="pill todo">TODO</span>`: types are
   `done` `wip` `todo` `idea` `check` `risk` `parked`.
 - Option blocks (for A/B/C design choices):
 
 ```
 <div class="opt rec" markdown>
-### Option A — the recommended one
+### Option A: the recommended one
 Text.
 </div>
 ```

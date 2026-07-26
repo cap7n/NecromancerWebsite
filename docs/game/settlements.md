@@ -2,7 +2,7 @@
 
 **Feature 4: villages and towns like Bannerlord, necromancer-themed.**
 
-!!! warning "OPEN — nothing here is decided"
+!!! warning "OPEN, nothing here is decided"
     [Q6](../project/open-questions.md#q6) is the blocking question: do you *conquer* settlements or
     *parasitise* them?
 
@@ -19,16 +19,16 @@ subjects, doesn't eat, and can't shop?**
 
 <div class="opt rec" markdown>
 
-### Mode 1 — Parasitise (the early game) · **recommended default**
+### Mode 1: Parasitise (the early game) · **recommended default**
 
 The settlement stays alive and human. You extract from it without owning it:
 
-- **Tribute** — coerced with [Dread](../systems/economy.md), no siege needed.
-- **Graveyard harvesting** — the cemetery is a finite, slowly-refilling node. Raiding it is fast
+- **Tribute**: coerced with [Dread](../systems/economy.md), no siege needed.
+- **Graveyard harvesting**: the cemetery is a finite, slowly-refilling node. Raiding it is fast
   income and enormous Dread cost.
-- **Fronts** — a corrupted merchant, an undertaker on the payroll, a cult cell in the slums. Your
+- **Fronts**: a corrupted merchant, an undertaker on the payroll, a cult cell in the slums. Your
   only legal-ish access to reagents and markets.
-- **Plague / curse** — deliberately raise mortality. Produces corpses *passively* and permanently
+- **Plague / curse**: deliberately raise mortality. Produces corpses *passively* and permanently
   damages prosperity. The purest expression of the economy's central tension.
 
 A parasitised settlement keeps producing. Push too hard and it collapses, and a dead village
@@ -38,18 +38,18 @@ produces nothing ever again.
 
 <div class="opt" markdown>
 
-### Mode 2 — Convert to a Necropolis (the late game)
+### Mode 2: Convert to a Necropolis (the late game)
 
 You take it and remake it. **One-way and expensive.** The living population is consumed, and the
 settlement stops producing food/recruits/prosperity and starts producing Bone, Reagents, and
 undead capacity instead.
 
-- **Charnel works** — corpses → Bone at scale.
-- **Reagent gardens / alchemical vats** — the only self-sufficient reagent source, so late-game
+- **Charnel works**: corpses → Bone at scale.
+- **Reagent gardens / alchemical vats**: the only self-sufficient reagent source, so late-game
   independence from living markets is *earned*.
-- **Barrow-vaults** — stored, dormant units you can wake instantly. Strategic reserve.
-- **A soul-well / obelisk** — extends the player's control aura or Will pool regionally.
-- **Garrison** — undead don't need pay, but they need reagents. A big garrison is a permanent drain.
+- **Barrow-vaults**: stored, dormant units you can wake instantly. Strategic reserve.
+- **A soul-well / obelisk**: extends the player's control aura or Will pool regionally.
+- **Garrison**: undead don't need pay, but they need reagents. A big garrison is a permanent drain.
 
 Converting is a **strategic wound to your own economy**: you've turned a renewable corpse farm into
 a factory. Doing it too early starves you. That's the decision that makes the system interesting,
@@ -58,7 +58,7 @@ and it needs to be visible and painful.
 </div>
 
 **Recommendation: both, staged.** Parasitise early, convert late, conversion permanent. It gives
-the campaign a natural arc — hidden predator → open warlord — without needing a scripted story.
+the campaign a natural arc: hidden predator → open warlord, without needing a scripted story.
 
 ## The visit experience
 
@@ -72,12 +72,12 @@ who can't be seen in public anyway.
 
 !!! warning "OPEN"
     Walkable settlement scenes are a real question for the full game (they're much of what people
-    love about Bannerlord). Deferred, not rejected — see [Backlog](../project/backlog.md).
+    love about Bannerlord). Deferred, not rejected: see [Backlog](../project/backlog.md).
 
 ## Living-faction response
 
 Settlements should react to you: evacuate cemeteries, hire mercenaries, wall up, burn their own
-dead. **Burning the dead is the key counter-verb** — it attacks the [combat loop](combat.md)
+dead. **Burning the dead is the key counter-verb**: it attacks the [combat loop](combat.md)
 directly and gives the living AI something smart to do.
 
 ## Related

@@ -1,6 +1,6 @@
 # Engine & Tooling
 
-!!! success "Decided 2026-07-25 — Godot 4.7"
+!!! success "Decided 2026-07-25: Godot 4.7"
     Same version as TowerDrop and OTR. No spike, no comparison round. See the
     [Decision Log](../project/decisions.md) for the full reasoning.
 
@@ -9,7 +9,7 @@
 - **Team comfort.** It's what TowerDrop is built in. No ramp-up, no new tooling, full source access,
   no licensing risk.
 - **The physics decision removed the objection.** Godot's weakness for this genre was always crowd
-  tooling and physics scale — and we've decided to use [neither](../project/decisions.md). What's
+  tooling and physics scale, and we've decided to use [neither](../project/decisions.md). What's
   left is MultiMesh instancing, custom shaders, and ENet, all of which TowerDrop already proved.
 - **Ecosystem payback.** Proving a networked horde game in Godot feeds back into the engine's
   ecosystem. A real, if secondary, reason.
@@ -44,7 +44,7 @@ go wrong, and it should be measured early rather than discovered at M3.
 The plan:
 
 1. Build the agent simulation in GDScript with a spatial hash.
-2. **Measure at the target count from the very first build** — not at the end.
+2. **Measure at the target count from the very first build**: not at the end.
 3. If it doesn't hold, port **only the hot loop** to GDExtension (Rust via godot-rust, or C++).
 
 Critically: **design the agent simulation as a swappable module from day one.** A clean boundary
@@ -54,12 +54,12 @@ Critically: **design the agent simulation as a swappable module from day one.** 
 ## Tooling to carry over from TowerDrop
 
 - **Balance logger** writing CSVs every run, plus an in-game overlay. Feel first, numbers second.
-- **Perf overlay from day one** — agent count, frame budget split, bandwidth. Given the risk above,
+- **Perf overlay from day one**: agent count, frame budget split, bandwidth. Given the risk above,
   this isn't a nicety, it's the instrument the project steers by.
 - **Hybrid workflow rule:** systems in code, tunable visual values in `.tres`/scenes the editor can
   adjust without a code round-trip.
 - **Editor-conflict rule:** don't write `.tscn`/`.tres` from tooling while the Godot editor has them
-  open — it will clobber on save.
+  open: it will clobber on save.
 
 ## Related
 
