@@ -3,10 +3,6 @@
 Every page is a plain Markdown file in the `docs/` folder of the wiki repo. Push to `main` and the
 site rebuilds itself in ~1 minute. No local tools required.
 
-!!! warning "Repo not created yet"
-    `repo_url` and `site_url` in `mkdocs.yml` are placeholders following the TowerDrop convention.
-    Create the GitHub repo, push, enable Pages, then fix those two values and the links below.
-
 ## Quickest way (browser)
 
 1. Click the **pencil icon** (top right of any page): it opens the file on GitHub.
@@ -16,7 +12,7 @@ site rebuilds itself in ~1 minute. No local tools required.
 ## Local way (git)
 
 ```bash
-git clone https://github.com/cap7n/necromancer-docs.git
+git clone https://github.com/cap7n/NecromancerWebsite.git
 ```
 
 Edit files in `docs/`, then commit and push. Done.

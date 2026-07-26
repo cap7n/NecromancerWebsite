@@ -5,11 +5,7 @@ The single point of truth for **Necromancer** (working title): design, systems, 
 Source is plain Markdown in `docs/`. Push to `main` and GitHub Actions rebuilds and
 deploys the site in ~1 minute (see `.github/workflows/deploy.yml`).
 
-Live site: https://cap7n.github.io/necromancer-docs/
-
-> **Setup not finished:** the repo URL above is a placeholder following the TowerDrop
-> convention. Create the GitHub repo, then fix `repo_url` / `site_url` in `mkdocs.yml`
-> and the link above.
+Live site: https://cap7n.github.io/NecromancerWebsite/
 
 ## Edit locally (optional)
 

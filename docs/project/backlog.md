@@ -26,7 +26,7 @@ For what the prototype is actually for, see [Prototype Scope](poc-scope.md).
 - <span class="pill done">DONE</span> ~~Pick the Godot version~~ → **4.7** (matches TowerDrop / OTR)
 - <span class="pill done">DONE</span> ~~Create the Godot project~~ — Godot 4.7, main scene = M0 spike
 - <span class="pill done">DONE</span> ~~Study OTR netcode + horde spawning~~ → documented in [OTR Carry-Over](../tech/otr-carryover.md)
-- <span class="pill todo">TODO</span> Create the wiki's GitHub repo; fix `repo_url` / `site_url` in `mkdocs.yml`.
+- <span class="pill done">DONE</span> ~~Create the wiki's GitHub repo~~ → [cap7n/NecromancerWebsite](https://github.com/cap7n/NecromancerWebsite), Actions deploy green
 - <span class="pill todo">TODO</span> Argue with the [Design Pillars](../pillars.md) and ratify or rewrite them.
 - <span class="pill todo">TODO</span> Characterise *XMODE* as an art reference (nobody has yet).
 
