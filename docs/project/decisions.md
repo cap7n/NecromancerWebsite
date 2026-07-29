@@ -579,6 +579,80 @@ open to argument.
   genuinely replaces the parasitic one. **Open, and exactly the kind of thing normally discovered too
   late.**
 
+## 2026-07-27 - Questionnaire batch: a round of answers from the owner
+
+Recorded in one entry; the why for each is short. Pages not yet rewritten to match are listed in the
+consistency note below.
+
+**Q2, closed again: real-time overworld, Bannerlord-ish.** Not turn-based. The activity-derived
+speed model from 2026-07-25 stands after all, so the reopening resolves back to Option B. The
+derived-speed subsystem, `Wait`/`Camp`, and the tick-aligned timescale are all back on the books.
+
+**Overworld information is invisible: messengers carry it.** You do not get a live view of the
+world's state; you get **messages from messengers** telling you what the world was like when they
+left. News is stale, partial, and interceptable. Pairs beautifully with the no-overview-camera rule:
+uncertainty about the world at the map scale, uncertainty about your own army at the battle scale.
+
+**Command is by shouts, radial-first.** `C` opens a **radial command menu** as the primary
+interface; free mouse remains available for pointing at things. Commands are *shouted*, diegetic,
+not drawn. **This demotes the line-drag formation (H3)** from a MUST to an open test, and
+[Unit System Design](../tech/unit-system.md) needs revising to match.
+
+**Open test: bind undead to items rather than to the player.** So regiments can be **traded between
+players** by handing over the object. Worth noticing: this generalises the anchor model. The banner
+IS the anchor; whoever holds it holds the leash. One mechanic would then cover detachments, trading,
+and co-op handoff.
+
+**Q5: the necromancers are a clan, faction or cult**, not a loner. **K3: a player can be another
+player's lieutenant.** Both fit the anchor model without new systems.
+
+**Q6: conquer AND parasitise, both stay: more choices. Q9: living factions are simulated, but not
+deep. D1: several rival factions.** PvP: maybe, still LATER.
+
+**Mounts: yes.** Unparked. The overworld-cheap/battle-expensive split recorded on
+[Unit System Design](../tech/unit-system.md) still applies to the how.
+
+**The spell kit is narrow by design: command, buff, debuff.** "Heal" means **Resurrect and Mend**.
+This *retires the earlier "damage spells MUST"* reading: the necromancer's power is the horde, not
+fireballs. P5 on Unit System Design needs revising.
+
+**Arrows are resolved volleys, precalculated hit or miss.** No projectile simulation. Undead ranged
+exists but limited and siege-flavoured: catapult, ballista.
+
+**Feral narrows, maybe: only special units can go feral.** Chaff stays leashed or simply collapses.
+Softens the 2026-07-26 feral decision; needs a definitive answer before the unit state machine is
+built.
+
+**E1: harvest-vs-raise is both** per-corpse and area. **E4: field-raised units do not persist after
+battle unless a ritual is performed on the battlefield.**
+
+**E3, the big one: ritual quality beats corpse quality, and SIN is the input.** The purer the soul,
+the worse the material. You corrupt cities to raise sin, and sinful souls fuel stronger rituals.
+Full write-up: [Rituals](../systems/rituals.md#sin).
+
+**M1, PoC definition extended:** travel a small map, raid a village, fight a battle, **do cultist
+things**, and discover **how much detail a single entity can carry**. That last clause pulls opposite
+the 800-horde axis and is worth keeping visible.
+
+## 2026-07-27 - Necromancer to the backburner; the ritual minigame becomes a standalone game
+
+**Decided:** Necromancer is acknowledged as **not a small project**. It moves to the backburner with
+the wiki as its single point of truth. The next active project is a **small standalone game about
+the ritual minigame**.
+
+**Why this is the right cut:** reading the answers back, rituals turned out to be load-bearing in
+four places (lieutenant summoning, battlefield persistence, unit quality, the sin economy) while
+being the least-designed system in the wiki. Spinning it off obeys [Pillar 1](../pillars.md)
+(prototype the unproven thing), matches the house pattern of small shippable games, and everything
+it proves flows back into Necromancer already play-tested. See
+[Rituals](../systems/rituals.md#spinoff).
+
+**Consistency note, deliberate:** several pages still describe superseded states: Unit System Design
+(damage-spell MUST, mounts parked, line-drag as MUST), Multiplayer & Time (Q2 shown as open), and
+the questionnaire (answered items not yet pruned). Left as-is for now since the project is going
+dormant; the Decision Log is authoritative. If Necromancer wakes up, reconciling those pages against
+this log is the first task.
+
 ---
 
 !!! note "What's still open"

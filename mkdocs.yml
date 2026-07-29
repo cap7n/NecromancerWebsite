@@ -50,6 +50,7 @@ nav:
       - Settlements: game/settlements.md
   - Systems:
       - Economy: systems/economy.md
+      - Rituals: systems/rituals.md
       - Multiplayer & Time: systems/multiplayer.md
       - Progression: systems/progression.md
   - Tech:

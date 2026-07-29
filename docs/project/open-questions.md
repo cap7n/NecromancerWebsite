@@ -21,28 +21,11 @@ Legend: <span class="pill risk">BLOCKING</span> decide before any code
 *Still open under this:* whether the design should later stretch to 3-4 players. Nothing should be
 built that makes it impossible, but 2 is the target.
 
-## Q2. Turn-based or real-time overworld? <span class="pill risk">BLOCKING</span> {#q2}
+## Q2. Turn-based or real-time overworld? <span class="pill done">DECIDED</span> {#q2}
 
-**Reopened 2026-07-26.** An activity-derived real-time clock was recorded as decided on 2026-07-25;
-it is open again, with **simultaneous turns** (Total War: Warhammer 3 style, with a march range) now
-an equal candidate.
-
-**Smaller than it looks:** battles are real-time either way, so this is an **overworld-layer**
-decision only. Nothing in combat, the unit system, or battle netcode changes.
-
-**Option A, simultaneous turns.** Deletes the multiplayer time problem outright: no shared clock, no
-speed negotiation, no tick-aligned timescale risk, and trivial overworld netcode. Battle length stops
-mattering. Costs the Bannerlord texture Feature 2 asked for, weakens day/night, adds turn-waiting
-friction, and reduces reinforcement to a range check.
-
-**Option B, real-time with derived speed.** Matches Feature 2, keeps the ride-to-your-friend's-battle
-moment and day/night as real mechanics, nobody waits on anybody. Costs a whole derived-speed
-subsystem, a hard battle-length budget, and continuous overworld replication.
-
-**Sharpest test available:** whichever makes [Act 1](../systems/progression.md) more tense, one
-skeleton hiding in a cellar, is probably the right answer.
-
--> [Multiplayer & Time](../systems/multiplayer.md#time)
+**Closed again 2026-07-27: real-time, Bannerlord-ish, not turn-based.** The activity-derived speed
+model stands. New wrinkle recorded with it: **overworld information is invisible**; the state of the
+world reaches you via **messengers**, so news is stale, partial, and interceptable.
 
 ## Q3. What is the actual horde-control verb set? <span class="pill risk">BLOCKING</span> {#q3}
 
@@ -70,26 +53,14 @@ high-level multiplayer. See [Engine & Tooling](../tech/engine.md).
 *Live risk:* GDScript may not hold ~800 agents. Mitigation is a contained GDExtension port of the
 hot loop: design the agent sim as a swappable module from day one.
 
-## Q5. Is the player a lone necromancer, or a clan/faction lord? <span class="pill wip">SOON</span> {#q5}
+## Q5. Lone necromancer or clan? <span class="pill done">DECIDED</span> {#q5}
 
-Bannerlord's whole strategic layer assumes clans, vassals, fiefs, and marriage. A necromancer is
-thematically a *loner or a cult leader*. If there's no clan there's no diplomacy layer, and the
-overworld game becomes much smaller: possibly correctly so.
+**A clan / faction / cult of necromancers**, not a loner. Fits the anchor model: a player can even be
+another player's lieutenant (K3, answered yes).
 
-**Recommendation: cult, not clan.** Living lieutenants and death knights instead of family;
-recruitment by corruption instead of marriage.
+## Q6. Conquer or parasitise settlements? <span class="pill done">DECIDED</span> {#q6}
 
-→ [The Necromancer](../game/necromancer.md)
-
-## Q6. Do you *conquer* settlements or *parasitise* them? <span class="pill wip">SOON</span> {#q6}
-
-Do you take towns and hold them like Bannerlord, or do you keep them alive and milk them, converting
-only a few into necropolises?
-
-**Recommendation: both, staged.** Parasitise early, convert late, and make conversion **permanent
-and costly** so it's a real strategic decision rather than a checkbox.
-
-→ [Settlements](../game/settlements.md)
+**Both. More choices.** The staged model (parasitise early, convert late) remains the working shape.
 
 ## Q7. What is the economy's actual resource list? <span class="pill wip">SOON</span> {#q7}
 
@@ -107,12 +78,9 @@ top of an ordinary living economy** the player interacts with only indirectly.
 and is killable, with the control aura anchored to it. The single largest scope cut available. See
 [The Necromancer](../game/necromancer.md).
 
-## Q9. Who are the enemies, and is there a living faction AI? <span class="pill wip">SOON</span> {#q9}
+## Q9. Living faction AI? <span class="pill done">DECIDED</span> {#q9}
 
-Bannerlord's world is alive because kingdoms fight each other without you. A world where everyone
-only reacts to the necromancer is much cheaper and much flatter.
-
-→ [Campaign Overworld](../game/overworld.md)
+**Several rival factions, simulated but not deep.**
 
 ## Q10. PvP? <span class="pill idea">LATER</span> {#q10}
 

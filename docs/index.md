@@ -5,6 +5,13 @@ strategic overworld you roam with a party, dropping into large real-time battles
 isn't soldiers in formation, it's a **horde of the risen** you steer rather than command, and every
 corpse on the field is ammunition.
 
+!!! warning "PROJECT STATUS: BACKBURNER (2026-07-27)"
+    Necromancer is acknowledged as **not a small project** and is dormant by choice, with this wiki
+    as its single point of truth. The active project is a **standalone game about the
+    [ritual minigame](systems/rituals.md#spinoff)**, whose findings flow back here. The
+    [Decision Log](project/decisions.md) is authoritative where pages disagree; the 2026-07-27
+    entries list what still needs reconciling.
+
 !!! success "M0 is built and passing"
     The agent-simulation spike runs: **800 agents at 5.07 ms average / 5.96 ms p95**, against an
     8 ms budget, sampled at peak chokepoint density. **No GDExtension port needed.** The project's
@@ -33,7 +40,7 @@ exists to serve them:
 | # | Feature | Where it's designed | Risk |
 |---|---|---|---|
 | 1 | **Multiplayer** | [Multiplayer & Time](systems/multiplayer.md), [Netcode](tech/netcode.md) | 🟢 Model and time both settled; execution risk remains |
-| 2 | **Bannerlord-like overworld** | [Campaign Overworld](game/overworld.md) | 🟠 Turn-based vs real-time reopened; the map itself was never the risk |
+| 2 | **Bannerlord-like overworld** | [Campaign Overworld](game/overworld.md) | 🟢 Real-time re-confirmed 2026-07-27; the map itself was never the risk |
 | 3 | **Combat like Bannerlord, but horde control not formations** | [Horde Combat](game/combat.md), [The Horde](game/horde.md) | 🔴 **Now the highest risk.** Unproven, and *this is the fun*: prototype it first |
 | 4 | **Villages & towns, necromancer-themed** | [Settlements](game/settlements.md) | 🟢 Design work, not technical risk |
 | 5 | **Deeper economy** | [Economy](systems/economy.md) | 🟢 Design work, but it's where the theme pays off |
@@ -72,7 +79,7 @@ world is his supply chain, which means he can't simply destroy it. See **[Econom
 | **Scale target: ~800 active agents** | ✅ **Decided**: see [Performance](tech/performance.md) |
 | **Player: caster, no melee** | ✅ **Decided**: see [The Necromancer](game/necromancer.md) |
 | **Art: low-detail models, dark-humour tone** | ✅ **Decided**: see [Art Direction](tech/art-direction.md) |
-| Overworld time: turn-based or real-time? | ⚠️ **REOPENED** 2026-07-26: see [Multiplayer & Time](systems/multiplayer.md#time) |
+| **Time: real-time, activity-derived (re-confirmed)** | ✅ **Decided** 2026-07-27, Bannerlord-ish, not turns |
 | Horde-control verb set | ⚠️ **The last blocker**: see [Horde Combat](game/combat.md) |
 | **Economy: 3 resources, no world simulation** | ✅ **Scoped** 2026-07-26 |
 | PoC scope & milestones | 🧪 Proposed: see [Prototype Scope](project/poc-scope.md) |
