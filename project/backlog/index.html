@@ -1,0 +1,1708 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Design wiki and single point of truth for Necromancer, a multiplayer necromancy campaign game, Bannerlord-style overworld, horde-control combat.">
+      
+      
+      
+        <link rel="canonical" href="https://cap7n.github.io/NecromancerWebsite/project/backlog/">
+      
+      
+        <link rel="prev" href="../poc-scope/">
+      
+      
+        <link rel="next" href="../decisions/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Backlog - Necromancer Design Wiki</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="light-green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#backlog" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Necromancer Design Wiki" class="md-header__button md-logo" aria-label="Necromancer Design Wiki" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Necromancer Design Wiki
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Backlog
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/cap7n/NecromancerWebsite" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Necromancer Design Wiki" class="md-nav__button md-logo" aria-label="Necromancer Design Wiki" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Necromancer Design Wiki
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/cap7n/NecromancerWebsite" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pillars/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Pillars
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../open-questions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ❓ Open Questions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../questionnaire/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📋 Design Questionnaire
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Game
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    The Game
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../game/necromancer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Necromancer (Player)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../game/overworld/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Campaign Overworld
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../game/combat/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Horde Combat
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../game/horde/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Horde (Units)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../game/settlements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Settlements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Systems
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Systems
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systems/economy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Economy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systems/rituals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rituals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systems/multiplayer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Multiplayer & Time
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systems/progression/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tech
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tech
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tech/engine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Engine & Tooling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tech/performance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Horde Scale & Performance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tech/unit-system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unit System Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tech/netcode/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Netcode Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tech/otr-carryover/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OTR Carry-Over
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tech/art-direction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Art Direction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Project
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../poc-scope/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prototype Scope (PoC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backlog
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backlog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#now-before-any-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Now: before any code
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#m0-agent-simulation-spike-complete" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        M0: Agent simulation spike COMPLETE
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="M0: Agent simulation spike COMPLETE">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#follow-ups-m0-surfaced" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Follow-ups M0 surfaced
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#m1-the-corpse-field" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        M1: The corpse field
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#m2-horde-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        M2: Horde control
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#m3-two-players-one-battle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        M3: Two players, one battle
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#m4-stub-overworld" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        M4: Stub overworld
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#m5-one-economic-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        M5: One economic loop
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ideas-parked" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ideas / parked
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#housekeeping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Housekeeping
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../decisions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Decision Log
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Roadmap & Priorities
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../how-to-edit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to Edit This Wiki
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#now-before-any-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Now: before any code
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#m0-agent-simulation-spike-complete" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        M0: Agent simulation spike COMPLETE
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="M0: Agent simulation spike COMPLETE">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#follow-ups-m0-surfaced" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Follow-ups M0 surfaced
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#m1-the-corpse-field" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        M1: The corpse field
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#m2-horde-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        M2: Horde control
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#m3-two-players-one-battle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        M3: Two players, one battle
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#m4-stub-overworld" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        M4: Stub overworld
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#m5-one-economic-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        M5: One economic loop
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ideas-parked" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ideas / parked
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#housekeeping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Housekeeping
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/cap7n/NecromancerWebsite/edit/main/docs/project/backlog.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="backlog">Backlog<a class="headerlink" href="#backlog" title="Permanent link">&para;</a></h1>
+<p>The changing task list. For <em>why</em> things are the way they are, see the <a href="../decisions/">Decision Log</a>.
+For what the prototype is actually for, see <a href="../poc-scope/">Prototype Scope</a>.</p>
+<p><strong>Legend:</strong>
+<span class="pill done">DONE</span>
+<span class="pill wip">WIP</span>
+<span class="pill todo">TODO</span>
+<span class="pill idea">IDEA</span>
+<span class="pill risk">NEEDS DECISION</span>
+<span class="pill parked">PARKED</span></p>
+<hr />
+<h2 id="now-before-any-code">Now: before any code<a class="headerlink" href="#now-before-any-code" title="Permanent link">&para;</a></h2>
+<ul>
+<li><span class="pill done">DONE</span> ~~Q1: multiplayer shape~~ → <strong>2-player co-op, split authority</strong></li>
+<li><span class="pill done">DONE</span> ~~Pillar 6: the unit-count number~~ → <strong>~800 active agents</strong></li>
+<li><span class="pill done">DONE</span> ~~Q4: engine~~ → <strong>Godot 4</strong></li>
+<li><span class="pill done">DONE</span> ~~Units: rigid bodies or positional agents?~~ → <strong>positional agents, no physics</strong></li>
+<li><span class="pill done">DONE</span> ~~Q8: does the player melee?~~ → <strong>no, caster only</strong></li>
+<li><span class="pill done">DONE</span> ~~Q2: time model~~ → <strong>activity-derived world speed + shared toggle</strong></li>
+<li><span class="pill done">DONE</span> ~~Q11: art tone~~ → <strong>dark humour, low-detail models</strong></li>
+<li><span class="pill risk">NEEDS DECISION</span> <strong>Q3: the horde verb set</strong>: 4 verbs proposed, needs sign-off before M2. <strong>Last blocker.</strong></li>
+<li><span class="pill done">DONE</span> ~~Pick the Godot version~~ → <strong>4.7</strong> (matches TowerDrop / OTR)</li>
+<li><span class="pill done">DONE</span> ~~Create the Godot project~~: Godot 4.7, main scene = M0 spike</li>
+<li><span class="pill done">DONE</span> ~~Study OTR netcode + horde spawning~~ → documented in <a href="../../tech/otr-carryover/">OTR Carry-Over</a></li>
+<li><span class="pill done">DONE</span> ~~Create the wiki's GitHub repo~~ → <a href="https://github.com/cap7n/NecromancerWebsite">cap7n/NecromancerWebsite</a>, Actions deploy green</li>
+<li><span class="pill todo">TODO</span> Argue with the <a href="../../pillars/">Design Pillars</a> and ratify or rewrite them.</li>
+<li><span class="pill todo">TODO</span> Characterise <em>XMODE</em> as an art reference (nobody has yet).</li>
+</ul>
+<h2 id="m0-agent-simulation-spike-complete">M0: Agent simulation spike <span class="pill done">COMPLETE</span><a class="headerlink" href="#m0-agent-simulation-spike-complete" title="Permanent link">&para;</a></h2>
+<p><strong>Result: PASS at 800 agents.</strong> 5.07 ms avg / 5.96 ms p95 single-threaded vs an 8 ms budget.
+No GDExtension port needed. Full numbers: <a href="../../tech/performance/">Horde Scale &amp; Performance</a>.</p>
+<ul>
+<li><span class="pill done">DONE</span> ~~Define pass/fail numbers before building~~ → 800 agents, sim under 8 ms</li>
+<li><span class="pill done">DONE</span> ~~Agents as indices in packed arrays~~ → <code>Scripts/Sim/agent_sim.gd</code></li>
+<li><span class="pill done">DONE</span> ~~Spatial hash + neighbour separation~~ → counting sort, allocation-free, <code>spatial_hash.gd</code></li>
+<li><span class="pill done">DONE</span> ~~Flow field over a grid~~ → SPFA integration + baked directions, <code>flow_field.gd</code></li>
+<li><span class="pill done">DONE</span> ~~<code>MultiMeshInstance3D</code> transform write-back~~ → 6 floats/agent/frame, 0.23 ms</li>
+<li><span class="pill done">DONE</span> ~~Perf overlay, ms per subsystem~~ → live overlay + <code>-- bench</code> headless mode</li>
+<li><span class="pill done">DONE</span> ~~Swappable module boundary~~ → <code>Scripts/Sim/</code> has no scene-tree access</li>
+<li><span class="pill done">DONE</span> ~~Try <code>WorkerThreadPool</code> on the separation pass~~ → ~1.6×, available, default off</li>
+<li><span class="pill done">DONE</span> ~~Decide GDExtension now or later~~ → <strong>not needed</strong>; boundary kept as insurance</li>
+<li><span class="pill done">DONE</span> Spell-impulse scatter (<code>vel += impulse</code>, decayed): proves the no-physics spectacle</li>
+</ul>
+<h3 id="follow-ups-m0-surfaced">Follow-ups M0 surfaced<a class="headerlink" href="#follow-ups-m0-surfaced" title="Permanent link">&para;</a></h3>
+<ul>
+<li><span class="pill risk">NEEDS FIX</span> <strong>Flow-field rebuild is ~28 ms</strong>: a 2-frame hitch on every rally-point move. Run it on a worker thread (it's a pure function writing to its own arrays). <strong>Before M2.</strong></li>
+<li><span class="pill todo">TODO</span> <strong>Re-run the benchmark on a mid-range CPU.</strong> Measured on an i9-13900K; the pillar target is mid-range, where single-threaded 800 could be 9-12 ms. PASS is provisional until then.</li>
+<li><span class="pill todo">TODO</span> <strong>Q14: judge crowd perception from the third-person camera</strong> (<code>C</code>, presets <code>1</code>..<code>6</code>). If 300 already reads as a horde, 800 is budget to spend elsewhere. <strong>Do this before optimising for more agents.</strong></li>
+<li><span class="pill idea">IDEA</span> <strong>Melee-lock: engaged agents skip separation entirely</strong> (Total War's paired-duel trick). Would make dense combat <em>cheaper</em> than open-field movement, inverting the cost curve. Highest-value optimisation known; measurable only once M2 has fighting.</li>
+<li><span class="pill idea">IDEA</span> Optimisation ladder for &gt;800: temporal LOD (time-slicing) → distance sim-LOD → symmetric pairs → ghost tier → GDExtension. See <a href="../../tech/performance/#ladder">Performance</a>.</li>
+<li><span class="pill idea">IDEA</span> <strong>Scattered slots</strong>: clump origin + jittered slot offsets + a decaying deviation term, à la Total War's undead. The known route to <em>thousands</em>: near-free when calm, and it collapses netcode bandwidth to per-clump rather than per-agent. Costs some emergent local behaviour. <strong>Decide only after Q14 and after melee-lock is measured.</strong> See <a href="../../tech/performance/#scattered-slots">Performance</a>.</li>
+<li><span class="pill risk">NEEDS CARE</span> Any distance-based sim LOD must key off <strong>nearest-of-all-players</strong>, not the local camera: split authority means my cheapened units are in your view.</li>
+<li><span class="pill todo">TODO</span> Chokepoint overlap is now visible and measurable. Tune separation strength for looks, not just cost.</li>
+</ul>
+<h2 id="m1-the-corpse-field">M1: The corpse field<a class="headerlink" href="#m1-the-corpse-field" title="Permanent link">&para;</a></h2>
+<p><strong>Design first.</strong> <a href="../../tech/unit-system/">Unit System Design</a> specifies capabilities and the derived
+pipeline: review and ratify it before writing code.</p>
+<ul>
+<li><span class="pill risk">NEEDS DECISION</span> Ratify or rewrite <a href="../../tech/unit-system/">Unit System Design</a>.</li>
+<li><span class="pill todo">TODO</span> Rewrite <code>agent_sim.gd</code> around the behaviour-byte pipeline (<code>FLOCK</code> / <code>SLOT</code> / <code>ENGAGED</code>). Keep the movement maths, keep <code>spatial_hash.gd</code> and <code>flow_field.gd</code> as-is.</li>
+<li>
+<p><span class="pill risk">MEASURE FIRST</span> <strong>Target acquisition, time-sliced from day one.</strong> Same order of cost as separation; measure before tuning anything else.</p>
+</li>
+<li>
+<p><span class="pill todo">TODO</span> Corpse-field data structure: spatial hash + second MultiMesh + decay timer.</p>
+</li>
+<li><span class="pill todo">TODO</span> Death pipeline: canned tip-over → corpse record, agent slot freed and reused. <strong>No ragdoll.</strong></li>
+<li><span class="pill todo">TODO</span> 3-4 hand-authored death clips, random pick + random rotation.</li>
+<li><span class="pill todo">TODO</span> <strong>Feed</strong> verb: radius query against the hash → raise. Make it feel <em>great</em>; this is the signature input.</li>
+<li><span class="pill todo">TODO</span> Corpse quality carried from the source unit (a knight raises better than a peasant).</li>
+<li><span class="pill todo">TODO</span> Vertex-animation-texture bake pipeline. <strong>The one piece of tech that has to be right.</strong></li>
+<li><span class="pill todo">TODO</span> Flat test arena + a spawner for target dummies.</li>
+</ul>
+<h2 id="m2-horde-control">M2: Horde control<a class="headerlink" href="#m2-horde-control" title="Permanent link">&para;</a></h2>
+<ul>
+<li><span class="pill todo">TODO</span> Verbs: Rally, Tide, Hold (flow field per rally point already exists from M0).</li>
+<li><span class="pill todo">TODO</span> Player body: third-person caster, killable, control aura attached to it.</li>
+<li><span class="pill todo">TODO</span> <strong>Spell impulses</strong>: <code>vel += impulse</code> in a radius, decayed. The scatter is the spectacle.</li>
+<li><span class="pill todo">TODO</span> Will pool + aura falloff + <strong>feral</strong> state.</li>
+<li><span class="pill todo">TODO</span> Scripted living enemy force with morale and routing (the contrast that sells the undead).</li>
+<li><span class="pill risk">NEEDS DECISION</span> Do feral units attack allies? Prototype both, judge by feel.</li>
+<li><span class="pill todo">TODO</span> Emissive allegiance/state colour-coding: first art task, purely functional.</li>
+<li><span class="pill todo">TODO</span> Separation tuning for chokepoints: <strong>expect this to be the first visible flaw.</strong></li>
+</ul>
+<h2 id="m3-two-players-one-battle">M3: Two players, one battle<a class="headerlink" href="#m3-two-players-one-battle" title="Permanent link">&para;</a></h2>
+<p><em>Reference implementation for most of this exists in OTR: see <a href="../../tech/otr-carryover/">OTR Carry-Over</a>.</em></p>
+<ul>
+<li><span class="pill todo">TODO</span> Port <code>NetworkTickManager</code> (distributed ownership, dirty flags, keepalive, MTU chunking) for the <em>few</em> entities: necromancers, elites, parties.</li>
+<li><span class="pill todo">TODO</span> Port <code>StateBuffer</code> (Hermite interpolation, snap distance) for those same entities.</li>
+<li><span class="pill todo">TODO</span> Horde replication à la <code>horde_manager</code>: packed XZ arrays, low Hz, client-side Y reconstruction, extended to per-player ownership.</li>
+<li><span class="pill todo">TODO</span> Steam lobby flow (GodotSteam, friends-only, overlay join): lift from OTR <code>steam_manager</code> + lobby UI.</li>
+<li><span class="pill todo">TODO</span> World-ready handshake gating all sync (OTR <code>Globals</code> pattern).</li>
+<li><span class="pill todo">TODO</span> Ownership split: each machine sims its own 200 + half the enemy force.</li>
+<li><span class="pill todo">TODO</span> Quantised state packing (~8 bytes/unit) + remote interpolation over ~2 intervals.</li>
+<li><span class="pill todo">TODO</span> Reliable channel for deaths / raises / casts; unreliable for positions.</li>
+<li><span class="pill todo">TODO</span> <strong>Corpse-race test:</strong> both players Feed the same pile. Must not produce ghost units.</li>
+<li><span class="pill todo">TODO</span> <strong>Late join into a running battle</strong> + enemy-ownership handoff.</li>
+<li><span class="pill todo">TODO</span> Bandwidth + fps measurement harness (expect ~16 KB/s each way).</li>
+</ul>
+<h2 id="m4-stub-overworld">M4: Stub overworld<a class="headerlink" href="#m4-stub-overworld" title="Permanent link">&para;</a></h2>
+<ul>
+<li><span class="pill todo">TODO</span> Tiny map, party icons, live world clock.</li>
+<li><span class="pill todo">TODO</span> <strong>Activity-derived speed</strong>: paused / 1× / 3× from both players' movement state.</li>
+<li><span class="pill risk">NEEDS DECISION</span> <code>Wait</code>/<code>Camp</code> action so waiting isn't idling: <strong>required, or ambushing is impossible.</strong></li>
+<li><span class="pill todo">TODO</span> Speed ramp between time states: feel only; correctness comes from order-derived state.</li>
+<li><span class="pill todo">TODO</span> <strong>Authoritative tick-aligned time scale</strong> ("scale becomes X at tick N"). Design in from the start.</li>
+<li><span class="pill todo">TODO</span> Shared HUD speed toggle, applies only when both players engage.</li>
+<li><span class="pill todo">TODO</span> Reinforcement zone + the buffs that extend it.</li>
+<li><span class="pill todo">TODO</span> Travel + route automation.</li>
+<li><span class="pill todo">TODO</span> Encounter → spins up an M3 battle instance while the map keeps ticking.</li>
+<li><span class="pill todo">TODO</span> Day/night, with real mechanical effect.</li>
+<li><span class="pill todo">TODO</span> Session-length sanity check: what does 2 hours accomplish?</li>
+</ul>
+<h2 id="m5-one-economic-loop">M5: One economic loop<a class="headerlink" href="#m5-one-economic-loop" title="Permanent link">&para;</a></h2>
+<ul>
+<li><span class="pill todo">TODO</span> Raid a village → corpses.</li>
+<li><span class="pill todo">TODO</span> Reagent upkeep + undead decay on the road.</li>
+<li><span class="pill todo">TODO</span> Village prosperity responding to being raided.</li>
+</ul>
+<h2 id="ideas-parked">Ideas / parked<a class="headerlink" href="#ideas-parked" title="Permanent link">&para;</a></h2>
+<ul>
+<li><span class="pill idea">IDEA</span> Plague as a spreading map-level system with its own simulation.</li>
+<li><span class="pill idea">IDEA</span> Death Knights raised from named enemies you personally kill.</li>
+<li><span class="pill idea">IDEA</span> Living cultist followers who can enter towns in daylight.</li>
+<li><span class="pill idea">IDEA</span> Enemy counter-verb: burning/consecrating the dead.</li>
+<li><span class="pill idea">IDEA</span> Player-to-player trade with asymmetric access as a co-op hook.</li>
+<li><span class="pill idea">IDEA</span> A player choosing to be another player's lieutenant rather than a rival.</li>
+<li><span class="pill parked">PARKED</span> Walkable settlement scenes.</li>
+<li><span class="pill parked">PARKED</span> Sieges.</li>
+<li><span class="pill parked">PARKED</span> PvP between necromancers.</li>
+<li><span class="pill parked">PARKED</span> Persistent-shard multiplayer.</li>
+<li><span class="pill parked">PARKED</span> Meta-progression across campaigns.</li>
+</ul>
+<h2 id="housekeeping">Housekeeping<a class="headerlink" href="#housekeeping" title="Permanent link">&para;</a></h2>
+<ul>
+<li><span class="pill todo">TODO</span> Decide what the <code>Necromancer builds</code>, <code>Necromancer COWORK</code>, and <code>Necromancer Marketing</code> folders are for and note it here.</li>
+<li><span class="pill todo">TODO</span> Project name (<a href="../open-questions/#q12">Q12</a>): "Necromancer" is unsearchable.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../poc-scope/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Prototype Scope (PoC)">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Prototype Scope (PoC)
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../decisions/" class="md-footer__link md-footer__link--next" aria-label="Next: Decision Log">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Decision Log
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "search.suggest", "search.highlight", "content.action.edit", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

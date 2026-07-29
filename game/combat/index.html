@@ -1,0 +1,2337 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Design wiki and single point of truth for Necromancer, a multiplayer necromancy campaign game, Bannerlord-style overworld, horde-control combat.">
+      
+      
+      
+        <link rel="canonical" href="https://cap7n.github.io/NecromancerWebsite/game/combat/">
+      
+      
+        <link rel="prev" href="../overworld/">
+      
+      
+        <link rel="next" href="../horde/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Horde Combat - Necromancer Design Wiki</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="light-green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#horde-combat" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Necromancer Design Wiki" class="md-header__button md-logo" aria-label="Necromancer Design Wiki" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Necromancer Design Wiki
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Horde Combat
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/cap7n/NecromancerWebsite" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Necromancer Design Wiki" class="md-nav__button md-logo" aria-label="Necromancer Design Wiki" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Necromancer Design Wiki
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/cap7n/NecromancerWebsite" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pillars/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Pillars
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/open-questions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ❓ Open Questions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/questionnaire/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📋 Design Questionnaire
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Game
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    The Game
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../necromancer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Necromancer (Player)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../overworld/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Campaign Overworld
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Horde Combat
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Horde Combat
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-design-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The design problem
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-core-loop-the-field-feeds-itself" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The core loop: the field feeds itself
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-verb-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The verb set
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The verb set">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-rally-where-the-horde-wants-to-be" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Rally: where the horde wants to be
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-tide-attack-move-a-direction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Tide: attack-move a direction
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-hold-anchor-here" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Hold: anchor here
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-feed-raise-the-dead-in-an-area" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Feed: raise the dead in an area
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aura-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Control: the aura, and detachments from it
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Control: the aura, and detachments from it">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-main-body-lives-in-your-aura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The main body lives in your aura
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#detachments-are-portions-you-split-off" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Detachments are portions you split off
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-catch-which-is-the-good-part-a-detachment-needs-an-anchor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The catch, which is the good part: a detachment needs an anchor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-lieutenant-the-primary-answer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A lieutenant, the primary answer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-planted-standard-totem-or-grave-stake" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A planted standard, totem or grave-stake
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-decaying-tether" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A decaying tether
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#anchors-solve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Three things this solves at once
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#your-co-op-partner-is-an-anchor-too" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Your co-op partner is an anchor too
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#line-drawing-works-for-both" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Line-drawing works for both
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-it-costs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What it costs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#addressing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Addressing regiments
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Addressing regiments">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#regiments-assigned-before-the-battle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Regiments, assigned before the battle
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#three-ways-to-address-one-layered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Three ways to address one, layered
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hotkeys-1-to-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hotkeys (1 to 4)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cards" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cards
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#banners-clicked-in-the-world" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Banners, clicked in the world
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#no-overview-camera" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        No overview camera
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-banner-is-doing-three-jobs-at-once" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The banner is doing three jobs at once
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-will-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Will system
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-the-player-stands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where the player stands
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#placement-and-what-no-formations-actually-means" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Placement, and what "no formations" actually means
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-we-are-not-doing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What we are not doing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../horde/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Horde (Units)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../settlements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Settlements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Systems
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Systems
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systems/economy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Economy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systems/rituals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rituals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systems/multiplayer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Multiplayer & Time
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systems/progression/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tech
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tech
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tech/engine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Engine & Tooling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tech/performance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Horde Scale & Performance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tech/unit-system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unit System Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tech/netcode/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Netcode Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tech/otr-carryover/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OTR Carry-Over
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tech/art-direction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Art Direction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Project
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/poc-scope/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prototype Scope (PoC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/backlog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backlog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/decisions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Decision Log
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Roadmap & Priorities
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/how-to-edit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to Edit This Wiki
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-design-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The design problem
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-core-loop-the-field-feeds-itself" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The core loop: the field feeds itself
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-verb-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The verb set
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The verb set">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-rally-where-the-horde-wants-to-be" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Rally: where the horde wants to be
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-tide-attack-move-a-direction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Tide: attack-move a direction
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-hold-anchor-here" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Hold: anchor here
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-feed-raise-the-dead-in-an-area" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Feed: raise the dead in an area
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aura-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Control: the aura, and detachments from it
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Control: the aura, and detachments from it">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-main-body-lives-in-your-aura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The main body lives in your aura
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#detachments-are-portions-you-split-off" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Detachments are portions you split off
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-catch-which-is-the-good-part-a-detachment-needs-an-anchor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The catch, which is the good part: a detachment needs an anchor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-lieutenant-the-primary-answer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A lieutenant, the primary answer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-planted-standard-totem-or-grave-stake" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A planted standard, totem or grave-stake
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-decaying-tether" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A decaying tether
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#anchors-solve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Three things this solves at once
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#your-co-op-partner-is-an-anchor-too" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Your co-op partner is an anchor too
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#line-drawing-works-for-both" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Line-drawing works for both
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-it-costs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What it costs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#addressing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Addressing regiments
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Addressing regiments">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#regiments-assigned-before-the-battle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Regiments, assigned before the battle
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#three-ways-to-address-one-layered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Three ways to address one, layered
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hotkeys-1-to-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hotkeys (1 to 4)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cards" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cards
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#banners-clicked-in-the-world" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Banners, clicked in the world
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#no-overview-camera" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        No overview camera
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-banner-is-doing-three-jobs-at-once" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The banner is doing three jobs at once
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-will-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Will system
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-the-player-stands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where the player stands
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#placement-and-what-no-formations-actually-means" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Placement, and what "no formations" actually means
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-we-are-not-doing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What we are not doing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/cap7n/NecromancerWebsite/edit/main/docs/game/combat.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="horde-combat">Horde Combat<a class="headerlink" href="#horde-combat" title="Permanent link">&para;</a></h1>
+<p><strong>This is the game's one genuinely novel system, and the first thing that should be prototyped.</strong>
+Everything else in the pitch has a proven reference implementation; this doesn't.</p>
+<div class="admonition warning">
+<p class="admonition-title">OPEN, nothing here is decided or built</p>
+<p>This page is a design proposal to argue with, not a spec.</p>
+</div>
+<h2 id="the-design-problem">The design problem<a class="headerlink" href="#the-design-problem" title="Permanent link">&para;</a></h2>
+<p>Bannerlord's battle game is <strong>formation management</strong>: eight formations, an F1-F6 command tree,
+shieldwall/loose/square, morale and discipline, and a cavalry charge you time. It's a game about
+<em>precision with a scarce, valuable resource</em>.</p>
+<p>Feature 3 asks for combat that <em>feels</em> like Bannerlord: real-time, physical, on the ground, at
+scale, but where the unit of thought is a <strong>horde</strong>, not a formation. The horde must be:</p>
+<ul>
+<li><strong>numerous</strong>: you should never count your units</li>
+<li><strong>stupid</strong>: precise orders would be a lie</li>
+<li><strong>expendable</strong>: losing them is the intended play pattern</li>
+<li><strong>self-replenishing on the field</strong>: the corpses are the point</li>
+</ul>
+<h2 id="the-core-loop-the-field-feeds-itself">The core loop: the field feeds itself<a class="headerlink" href="#the-core-loop-the-field-feeds-itself" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>Kill → corpse → raise → kill.</strong> The battlefield is a resource node that both sides are
+standing on.</p>
+</blockquote>
+<p>This is the mechanic that makes horde combat its own game rather than worse RTS. Consequences we
+want and should protect:</p>
+<ul>
+<li><strong>Big fights are better than small fights.</strong> More enemies = more raw material.</li>
+<li><strong>A losing fight can turn.</strong> Attrition is not a one-way ratchet, so the tension curve is
+  U-shaped instead of a slide.</li>
+<li><strong>Casualties don't hurt</strong>: your own fallen are also raw material. This removes the "save your
+  troops" instinct that would kill the fantasy.</li>
+<li><strong>Position matters for a new reason.</strong> The pile of dead is terrain now. You want to fight <em>on</em>
+  the killing field, not away from it.</li>
+<li><strong>The enemy gets a counter-verb for free:</strong> burn the dead, consecrate ground, fight in a place
+  with no bodies. That's a whole design space handed to us.</li>
+</ul>
+<h2 id="the-verb-set">The verb set<a class="headerlink" href="#the-verb-set" title="Permanent link">&para;</a></h2>
+<p>Deliberately tiny. If it needs a command tree, it's failed. These sit <em>on top of</em> the
+<a href="#aura-control">aura and detachment model</a>: the main body needs none of them, so every verb below is
+really a detachment order or a spell.</p>
+<div class="opt rec">
+<h3 id="1-rally-where-the-horde-wants-to-be">1. Rally: where the horde wants to be<a class="headerlink" href="#1-rally-where-the-horde-wants-to-be" title="Permanent link">&para;</a></h3>
+<p>A placed marker the horde drifts toward and clumps around. Movement, but <em>sloppy</em>: they arrive
+as a mass over several seconds, not as a formation on a line.</p>
+<h3 id="2-tide-attack-move-a-direction">2. Tide: attack-move a direction<a class="headerlink" href="#2-tide-attack-move-a-direction" title="Permanent link">&para;</a></h3>
+<p>Point and they surge. Once committed they're hard to recall, which is the cost. This is the
+"charge" and it should feel like releasing something, not steering it.</p>
+<h3 id="3-hold-anchor-here">3. Hold: anchor here<a class="headerlink" href="#3-hold-anchor-here" title="Permanent link">&para;</a></h3>
+<p>Stop drifting, fight what comes. The defensive verb, and the one that lets you split the horde
+into a holding mass and a striking mass without ever calling it a "formation."</p>
+<h3 id="4-feed-raise-the-dead-in-an-area">4. Feed: raise the dead in an area<a class="headerlink" href="#4-feed-raise-the-dead-in-an-area" title="Permanent link">&para;</a></h3>
+<p>The active necromancy verb, on a cooldown/cost. Everything dead in a radius gets up on your side.
+This is the button the whole fight is built around and it should be the most satisfying input in
+the game.</p>
+</div>
+<p>That's four. Add a fifth only when the prototype proves it's missing.</p>
+<h2 id="aura-control">Control: the aura, and detachments from it<a class="headerlink" href="#aura-control" title="Permanent link">&para;</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">PROPOSED 2026-07-26, not decided</p>
+<p>This replaces the earlier four-verb proposal as the working shape of the control scheme. It came
+out of the observation that an aura may be a better fit than formations, but that the horde still
+has to be spread into slots either way.</p>
+</div>
+<p>Two tiers, and only one of them needs commanding.</p>
+<h3 id="the-main-body-lives-in-your-aura">The main body lives in your aura<a class="headerlink" href="#the-main-body-lives-in-your-aura" title="Permanent link">&para;</a></h3>
+<p>It has no orders and needs none. It clusters around you, moves when you move, and fights what you
+walk into. This is most of the horde, most of the time, and <strong>it is what stops the game becoming an
+RTS: you steer the bulk of your army by walking.</strong></p>
+<h3 id="detachments-are-portions-you-split-off">Detachments are portions you split off<a class="headerlink" href="#detachments-are-portions-you-split-off" title="Permanent link">&para;</a></h3>
+<p>A detachment takes a tactical order and operates away from you: hold that ridge, take that gate,
+flank around the wood. It does not need you standing next to it.</p>
+<h3 id="the-catch-which-is-the-good-part-a-detachment-needs-an-anchor">The catch, which is the good part: a detachment needs an anchor<a class="headerlink" href="#the-catch-which-is-the-good-part-a-detachment-needs-an-anchor" title="Permanent link">&para;</a></h3>
+<p>The leash <em>is</em> the necromancer's aura. Undead outside it degrade and eventually go
+<a href="#the-feral-question">feral</a>. So a detachment sent across the field is, by default, a group of units
+walking out of your control.</p>
+<p>That is the constraint to build on, not to design away. Something has to hold the leash:</p>
+<div class="opt rec">
+<h3 id="a-lieutenant-the-primary-answer">A lieutenant, the primary answer<a class="headerlink" href="#a-lieutenant-the-primary-answer" title="Permanent link">&para;</a></h3>
+<p>Projects a small aura of its own. Already in <a href="../horde/">the roster</a>, and it makes lieutenants
+<strong>tactically essential rather than merely strong</strong>, which is a far better reason to want one.</p>
+</div>
+<div class="opt">
+<h3 id="a-planted-standard-totem-or-grave-stake">A planted standard, totem or grave-stake<a class="headerlink" href="#a-planted-standard-totem-or-grave-stake" title="Permanent link">&para;</a></h3>
+<p>A weaker fixed aura at a spot you choose. Cheap, expendable, <strong>destructible by the enemy</strong>. Useful
+for holding ground you have already taken.</p>
+<h3 id="a-decaying-tether">A decaying tether<a class="headerlink" href="#a-decaying-tether" title="Permanent link">&para;</a></h3>
+<p>No anchor at all. The detachment slips toward feral on a timer. Fine for a short strike, useless for
+holding anything.</p>
+</div>
+<p><strong>The number of anchors you own is the number of detachments you can run.</strong> That cap comes from the
+fiction rather than a UI restriction, it is a natural progression axis, and it keeps
+<a href="../../pillars/">Pillar 3</a> intact: the limit is control, never headcount.</p>
+<h3 id="anchors-solve">Three things this solves at once<a class="headerlink" href="#anchors-solve" title="Permanent link">&para;</a></h3>
+<p>Promoting lieutenants to anchors turns out to answer questions we were treating as separate.</p>
+<p><strong>1. It solves the control UI.</strong> The open risk was <em>"am I commanding the main body or a detachment?"</em>
+With anchors the answer is structural:</p>
+<blockquote>
+<p><strong>You never command units. You command anchors.</strong></p>
+</blockquote>
+<p>Your body anchors the main body. Each detachment has a lieutenant. So the entire control scheme is
+<strong>at most four things you can address</strong>, each with a position and a shape, reached by hotkey, card or
+<a href="#addressing">banner</a>. A small fixed set of pieces, legible from a third-person camera.</p>
+<p><strong>2. It gives the enemy something intelligent to do.</strong> Kill the lieutenant and its detachment starts
+going feral, which means turning on whatever is nearest. The living AI does not need to be clever to
+be dangerous, it needs one instruction: <strong>find the glowing one</strong>. Suddenly there is a protect-the-VIP
+layer inside a game about disposable bodies, and the counter-play writes itself.</p>
+<p><strong>3. It gives the player something to lose.</strong> This is the one that matters most.</p>
+<p>The whole design says the horde is expendable, losses do not hurt, and you should throw bodies at
+problems. That is correct, but taken alone it is also a game where <strong>nothing can be taken from you</strong>,
+and a game with no possible loss has no tension. Lieutenants are the exception that makes the rule
+work: few, persistent across battles, expensive in <a href="../../systems/economy/">Anima</a>, and genuinely
+mournable. The chaff is free precisely so the anchors can be precious.</p>
+<div class="admonition success">
+<p class="admonition-title">DECIDED: when a lieutenant dies, its detachment goes feral</p>
+<p>No grace period and no timer. The detachment scatters and attacks everything, and you recover it
+by walking your aura over it. See <a href="#the-feral-question">the feral question</a>.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Naming: players name their own</p>
+<p>"Lieutenant" is a placeholder, and a military word in a game that is
+<a href="../../tech/art-direction/">not</a> played straight. <em>Overseer</em>, <em>Foreman</em> and <em>Bailiff</em> fit the
+undead-middle-management register better.</p>
+<p><strong>Players name their own</strong>, which is cheap to build and does real work: a named Overseer you
+summoned at ruinous cost is something you will actually mind losing.</p>
+</div>
+<h3 id="your-co-op-partner-is-an-anchor-too">Your co-op partner is an anchor too<a class="headerlink" href="#your-co-op-partner-is-an-anchor-too" title="Permanent link">&para;</a></h3>
+<p>A second player's aura holds units exactly the way yours does, so <strong>two players naturally divide the
+field with no extra systems</strong>. It also means their death, or their wandering off, has consequences
+for units near them. Worth confirming rather than discovering: see
+<a href="#the-feral-question">the feral question</a>.</p>
+<h3 id="line-drawing-works-for-both">Line-drawing works for both<a class="headerlink" href="#line-drawing-works-for-both" title="Permanent link">&para;</a></h3>
+<p>Drag a line and they distribute across it, X ranks deep: the main body reshapes around you, or a
+detachment forms up where you drew. They hold it loosely and abandon it on contact, per
+<a href="#placement-and-what-no-formations-actually-means">Placement</a> below.</p>
+<h3 id="what-it-costs">What it costs<a class="headerlink" href="#what-it-costs" title="Permanent link">&para;</a></h3>
+<p><strong>Moving goals cannot use a flow field.</strong> This is the architectural consequence and it is worth
+stating plainly: a field takes ~40 ms to rebuild, so a goal that moves every frame (you) can never
+have one. The main body therefore steers <strong>directly toward its aura slot</strong>, with separation and wall
+sliding, which is fine because its slots are by definition right next to you. Detachments have
+<em>static</em> goals, so a flow field is exactly right for them.</p>
+<p><strong>One flow field per detachment</strong>: roughly 10,000 cells, ~120 KB, ~40 ms to rebuild off-thread.
+Affordable, but it argues for a <strong>cap of 3 or 4 detachments</strong>, which is the same number the anchor
+limit suggests. Two independent constraints landing on the same figure is usually a sign the design
+is coherent.</p>
+<p><strong>Two control contexts is the real UI risk</strong>, and it is a UI problem rather than a maths problem.
+See below.</p>
+<h2 id="addressing">Addressing regiments<a class="headerlink" href="#addressing" title="Permanent link">&para;</a></h2>
+<div class="admonition success">
+<p class="admonition-title">Position corrected 2026-07-26</p>
+<p>Earlier drafts of this page treated "RTS" as a thing to avoid on principle. That was wrong, and
+it was defending a vocabulary rather than a constraint. <strong>RTS elements are tools. Use the ones
+that fit.</strong></p>
+<p>The constraint that actually matters is not whether the UI looks like an RTS. It is:</p>
+<blockquote>
+<p><strong>How many things can the player address, and how fast must they switch between them?</strong></p>
+</blockquote>
+<p>Four addressable groups is a readable tactical layer. Forty is APM micro-management, which is a
+worse version of a game other people already make well. The number is the design, not the widget.</p>
+</div>
+<h3 id="regiments-assigned-before-the-battle">Regiments, assigned before the battle<a class="headerlink" href="#regiments-assigned-before-the-battle" title="Permanent link">&para;</a></h3>
+<p>The horde is divided into a <strong>small number of named regiments</strong> during deployment, not mid-fight.
+Each regiment gets an <a href="#aura-control">anchor</a>: your own body for the main body, a lieutenant or a
+standard for each detachment.</p>
+<p>Doing it before the fight is worth it on its own:</p>
+<ul>
+<li>Composition decisions happen in a calm moment rather than under pressure.</li>
+<li>It gives the <strong>deployment phase an actual purpose</strong>, which was previously an open question.</li>
+<li>Regiment count is capped by anchors you own, so the cap comes from the fiction rather than a
+  UI limit.</li>
+</ul>
+<h3 id="three-ways-to-address-one-layered">Three ways to address one, layered<a class="headerlink" href="#three-ways-to-address-one-layered" title="Permanent link">&para;</a></h3>
+<p>Not alternatives. Each covers a case the others miss.</p>
+<div class="opt rec">
+<h3 id="hotkeys-1-to-4">Hotkeys (1 to 4)<a class="headerlink" href="#hotkeys-1-to-4" title="Permanent link">&para;</a></h3>
+<p>Fastest and the only one that is always reliable. No aiming, no visibility requirement, works while
+the camera is pointed elsewhere. This is the one that has to feel good.</p>
+<h3 id="cards">Cards<a class="headerlink" href="#cards" title="Permanent link">&para;</a></h3>
+<p>A small bar showing each regiment's state at a glance: strength, what it is doing, and <strong>how close it
+is to going feral</strong>. Clickable, but its real job is <em>readout</em> rather than input. This is where the
+<a href="../../tech/unit-system/">state machine</a> becomes visible to the player.</p>
+<h3 id="banners-clicked-in-the-world">Banners, clicked in the world<a class="headerlink" href="#banners-clicked-in-the-world" title="Permanent link">&para;</a></h3>
+<p>Diegetic and the best-feeling of the three. Each anchor carries a standard visible above the mass, so
+you click the thing itself instead of a widget. Needs the banner to be visible, which is why it is
+layered on top of hotkeys rather than replacing them.</p>
+</div>
+<h3 id="no-overview-camera">No overview camera<a class="headerlink" href="#no-overview-camera" title="Permanent link">&para;</a></h3>
+<p>Combat is commanded <strong>from inside the fight</strong>, in third person. There is no god-view.</p>
+<p>That is the real constraint behind "not an RTS", and it is worth leaning on rather than working
+around: <strong>the player cannot see their whole army.</strong> Cards become a readout of what you cannot see,
+banners become how you locate your own forces across a field, and a detachment fighting out of sight
+is genuinely out of sight. Uncertainty about your own army is a mechanic, not a UI failure.</p>
+<h3 id="the-banner-is-doing-three-jobs-at-once">The banner is doing three jobs at once<a class="headerlink" href="#the-banner-is-doing-three-jobs-at-once" title="Permanent link">&para;</a></h3>
+<p>Worth noticing, because it is the sort of overlap that means a design is holding together:</p>
+<ol>
+<li><strong>It is how you select the regiment.</strong></li>
+<li><strong>It is how you read where your forces are</strong> across a field of near-identical bodies, which is
+   <a href="../../pillars/">Pillar 7</a>.</li>
+<li><strong>It is the enemy's target.</strong> A banner marks the anchor, and killing the anchor sends the
+   detachment feral. The living AI needs one instruction, <em>go for the banners</em>, to be genuinely
+   dangerous.</li>
+</ol>
+<p>Tattered standards over a shambling mass is also just the right image for the game.</p>
+<h2 id="the-will-system">The Will system<a class="headerlink" href="#the-will-system" title="Permanent link">&para;</a></h2>
+<p>Per <a href="../../pillars/">Pillar 3</a>, the cap isn't headcount, it's <strong>Will</strong> (working name).</p>
+<ul>
+<li>Every raised unit costs upkeep against a <strong>Will pool</strong>.</li>
+<li>Units within your <strong>control aura</strong> are obedient and slightly stronger.</li>
+<li>Units outside it degrade: slow to respond, then ignore orders, then <strong>go feral</strong>: attacking the
+  nearest living thing, which includes you and, in multiplayer, your friends.</li>
+<li>Over-raising is therefore self-limiting and <em>dramatic</em> rather than a greyed-out button. The
+  greedy play is available and it bites.</li>
+</ul>
+<p>!!! success "DECIDED 2026-07-26: feral is chaotic but recoverable" {#the-feral-question}
+    Feral undead <strong>spread out and attack everything with no cohesion.</strong> No formation, no orders, no
+    discrimination. They are a hazard to the living, to you, and to each other.</p>
+<pre><code>**But they are not lost.** Walk your aura over them and they get their master back and start
+taking orders again. Under the [Devotion proposal](../systems/economy.md#devotion) that recovery
+**costs**, which means an empty pool leaves them permanently hostile: the difference between a
+mess you clean up and a mess that is now hunting you.
+
+This is better than the grace-period proposal it replaces, and simpler. The fail state is **a
+mess you go and clean up**, not units deleted from your roster, so over-raising stays dangerous
+without being punishing. It creates a herding job in the middle of a battle, which is a genuinely
+novel thing to be doing. And because feral units attack the *living* too, a horde that slips its
+leash is uncontrolled rather than useless.
+
+It also disposes of the "what happens when a lieutenant dies" question: its detachment goes feral
+and scatters, and you recover it by going there. The scramble is the recovery, not a timer.
+</code></pre>
+<h2 id="where-the-player-stands">Where the player stands<a class="headerlink" href="#where-the-player-stands" title="Permanent link">&para;</a></h2>
+<p>Per <a href="../../project/open-questions/#q8">Q8</a>:
+the working assumption is a <strong>third-person caster, physically present and killable</strong>. The control
+aura is centred on the player's body, which means:</p>
+<ul>
+<li>Positioning is the core skill: you are the anchor the horde is tethered to.</li>
+<li>Pushing the aura forward into the enemy is aggressive and dangerous.</li>
+<li>Dying mid-battle isn't instant defeat but the horde immediately starts going feral. That's a
+  fail-state with drama.</li>
+</ul>
+<h2 id="placement-and-what-no-formations-actually-means">Placement, and what "no formations" actually means<a class="headerlink" href="#placement-and-what-no-formations-actually-means" title="Permanent link">&para;</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Revised 2026-07-26: the horde CAN be given a shape</p>
+<p>An earlier version of this page said "no formation shapes, facings, or spacing controls." That
+is <strong>no longer accurate.</strong> A stated requirement is that the player can <strong>drag a line and have
+the horde divide itself across it, X ranks deep</strong>
+(<a href="../../tech/unit-system/">H3</a>).</p>
+</div>
+<p>So the distinction is not <em>shape vs no shape</em>. It's:</p>
+<blockquote>
+<p><strong>The player places a shape. The horde fails to hold it.</strong></p>
+</blockquote>
+<ul>
+<li>You drag a line; they <em>distribute</em> onto it over several seconds, raggedly, arriving as a mass.</li>
+<li>They hold it <strong>loosely</strong>: jittering around their slot, not standing to attention.</li>
+<li>They <strong>abandon it</strong> the moment they move or make contact, and they don't reform unless told.</li>
+<li>There is no drill, no facing discipline, no shieldwall, no spacing slider.</li>
+</ul>
+<p>The living enemy is the contrast: they hold the same kind of slot <strong>precisely</strong>, keep it while
+marching, and reform after disruption. Same underlying system, opposite discipline, which is the
+whole aesthetic of the game expressed in one parameter.</p>
+<p>Total War: Warhammer's undead are the proof this works: zombies and skeletons read as a ragged mob
+while still being slot-based regiments underneath. <strong>The sloppy look and the cheap implementation
+are orthogonal.</strong> See <a href="../../tech/performance/#scattered-slots">scattered slots</a>.</p>
+<h2 id="what-we-are-not-doing">What we are <em>not</em> doing<a class="headerlink" href="#what-we-are-not-doing" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>No drag-selecting arbitrary subsets.</strong> You address whole regiments, never individual skeletons,
+  and the roster is fixed before the fight rather than assembled during it.</li>
+<li>No drill: no facings, no spacing controls, no shieldwall/wedge/square menu.</li>
+<li><strong>No APM.</strong> The test is not whether a control looks like an RTS, it is whether playing well
+  requires clicking fast. Four regiments addressed by hotkey does not. Forty does.</li>
+<li>No morale-driven rout for the undead. <strong>The dead don't flee</strong>: that's their whole advantage, and
+  the living enemy's routing is the contrast that sells it.</li>
+</ul>
+<h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../horde/">The Horde (Units)</a>: what actually gets raised</li>
+<li><a href="../necromancer/">The Necromancer</a>: the player's own kit</li>
+<li><a href="../../tech/performance/">Horde Scale &amp; Performance</a>: how many of them there can be</li>
+<li><a href="../../tech/netcode/">Netcode Architecture</a>: how hundreds of units survive multiplayer</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../overworld/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Campaign Overworld">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Campaign Overworld
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../horde/" class="md-footer__link md-footer__link--next" aria-label="Next: The Horde (Units)">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                The Horde (Units)
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "search.suggest", "search.highlight", "content.action.edit", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

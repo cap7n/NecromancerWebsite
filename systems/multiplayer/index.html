@@ -1,0 +1,1816 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Design wiki and single point of truth for Necromancer, a multiplayer necromancy campaign game, Bannerlord-style overworld, horde-control combat.">
+      
+      
+      
+        <link rel="canonical" href="https://cap7n.github.io/NecromancerWebsite/systems/multiplayer/">
+      
+      
+        <link rel="prev" href="../rituals/">
+      
+      
+        <link rel="next" href="../progression/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Multiplayer & Time - Necromancer Design Wiki</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="light-green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#multiplayer-time" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Necromancer Design Wiki" class="md-header__button md-logo" aria-label="Necromancer Design Wiki" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Necromancer Design Wiki
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Multiplayer & Time
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/cap7n/NecromancerWebsite" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Necromancer Design Wiki" class="md-nav__button md-logo" aria-label="Necromancer Design Wiki" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Necromancer Design Wiki
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/cap7n/NecromancerWebsite" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pillars/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Pillars
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/open-questions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ❓ Open Questions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/questionnaire/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📋 Design Questionnaire
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Game
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    The Game
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../game/necromancer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Necromancer (Player)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../game/overworld/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Campaign Overworld
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../game/combat/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Horde Combat
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../game/horde/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Horde (Units)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../game/settlements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Settlements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Systems
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Systems
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../economy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Economy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rituals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rituals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Multiplayer & Time
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Multiplayer & Time
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-is-hard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why this is hard
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shape" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q1: The shape of multiplayer
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Q1: The shape of multiplayer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#option-a-small-co-op-2-4-players-recommended" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option A: Small co-op (2-4 players) · recommended
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-b-larger-co-op-up-to-8-cult-sub-factions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option B: Larger co-op (up to 8, cult sub-factions)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-c-persistent-shard-mmo-lite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option C: Persistent shard (MMO-lite)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-d-competitive-rival-necromancers-campaign-has-a-winner" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option D: Competitive (rival necromancers, campaign has a winner)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#time" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The time model: still open
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The time model: still open">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#this-decision-is-smaller-than-it-looks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        This decision is smaller than it looks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-a-simultaneous-turns-total-war-warhammer-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option A: simultaneous turns (Total War: Warhammer 3)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-b-real-time-activity-derived-speed-bannerlord" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option B: real-time, activity-derived speed (Bannerlord)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-each-does-to-the-campaign-arc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What each does to the campaign arc
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nothing-has-been-chosen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nothing has been chosen
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#knock-on-effects-to-work-through" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Knock-on effects to work through
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../progression/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tech
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tech
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tech/engine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Engine & Tooling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tech/performance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Horde Scale & Performance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tech/unit-system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unit System Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tech/netcode/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Netcode Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tech/otr-carryover/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OTR Carry-Over
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tech/art-direction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Art Direction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Project
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/poc-scope/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prototype Scope (PoC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/backlog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backlog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/decisions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Decision Log
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Roadmap & Priorities
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/how-to-edit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to Edit This Wiki
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-is-hard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why this is hard
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shape" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q1: The shape of multiplayer
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Q1: The shape of multiplayer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#option-a-small-co-op-2-4-players-recommended" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option A: Small co-op (2-4 players) · recommended
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-b-larger-co-op-up-to-8-cult-sub-factions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option B: Larger co-op (up to 8, cult sub-factions)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-c-persistent-shard-mmo-lite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option C: Persistent shard (MMO-lite)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-d-competitive-rival-necromancers-campaign-has-a-winner" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option D: Competitive (rival necromancers, campaign has a winner)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#time" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The time model: still open
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The time model: still open">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#this-decision-is-smaller-than-it-looks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        This decision is smaller than it looks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-a-simultaneous-turns-total-war-warhammer-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option A: simultaneous turns (Total War: Warhammer 3)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-b-real-time-activity-derived-speed-bannerlord" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option B: real-time, activity-derived speed (Bannerlord)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-each-does-to-the-campaign-arc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What each does to the campaign arc
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nothing-has-been-chosen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nothing has been chosen
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#knock-on-effects-to-work-through" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Knock-on effects to work through
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/cap7n/NecromancerWebsite/edit/main/docs/systems/multiplayer.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="multiplayer-time">Multiplayer &amp; Time<a class="headerlink" href="#multiplayer-time" title="Permanent link">&para;</a></h1>
+<p><strong>Feature 1, and the constraint that shapes everything else.</strong> Per <a href="../../pillars/">Pillar 5</a>, systems
+get designed multiplayer-first; anything that only works with a pausable, fast-forwardable world
+doesn't survive and has to be redesigned now.</p>
+<div class="admonition warning">
+<p class="admonition-title">OPEN, nothing here is decided</p>
+<p>Two blocking questions live on this page: <a href="../../project/open-questions/#q1">Q1</a> (shape of
+multiplayer) and <a href="../../project/open-questions/#q2">Q2</a> (time model). They gate the engine choice
+and the entire netcode architecture.</p>
+</div>
+<h2 id="why-this-is-hard">Why this is hard<a class="headerlink" href="#why-this-is-hard" title="Permanent link">&para;</a></h2>
+<p>Bannerlord's campaign is built on two single-player affordances:</p>
+<ol>
+<li><strong>The player controls the clock</strong>: pause to think, fast-forward through travel.</li>
+<li><strong>The world stops for a battle</strong>: a 20-minute fight costs zero campaign time.</li>
+</ol>
+<p>With two or more players, both break immediately. If Player A pauses to browse a market, does
+Player B stop mid-journey? If A fights a 20-minute battle, does B stand still in a field for
+20 minutes?</p>
+<p>This is not a netcode problem, it's a <strong>design</strong> problem, and it has to be answered before code.</p>
+<h2 id="shape">Q1: The shape of multiplayer<a class="headerlink" href="#shape" title="Permanent link">&para;</a></h2>
+<div class="opt rec">
+<h3 id="option-a-small-co-op-2-4-players-recommended">Option A: Small co-op (2-4 players) · <strong>recommended</strong><a class="headerlink" href="#option-a-small-co-op-2-4-players-recommended" title="Permanent link">&para;</a></h3>
+<p>One shared campaign. Each player is their own necromancer with their own party, roaming the same
+overworld. Host-authoritative (or a lightweight dedicated server). Drop-in/drop-out; when a player
+is offline their party sleeps in place or retires to a stronghold.</p>
+<p><strong>For:</strong> achievable as a PoC · matches the natural "me and my mates" appeal of a Bannerlord co-op ·
+scales up later if it works.
+<strong>Against:</strong> shared progress means the campaign only advances when people are online together.</p>
+</div>
+<div class="opt">
+<h3 id="option-b-larger-co-op-up-to-8-cult-sub-factions">Option B: Larger co-op (up to 8, cult sub-factions)<a class="headerlink" href="#option-b-larger-co-op-up-to-8-cult-sub-factions" title="Permanent link">&para;</a></h3>
+<p>Same as A but with enough players to want internal structure: one Arch-Lich and lieutenants, or
+several allied cults. Needs a real dedicated server and a much more serious approach to time.</p>
+<p><strong>For:</strong> more social, more replayable.
+<strong>Against:</strong> every design problem gets harder and the PoC gets further away.</p>
+</div>
+<div class="opt">
+<h3 id="option-c-persistent-shard-mmo-lite">Option C: Persistent shard (MMO-lite)<a class="headerlink" href="#option-c-persistent-shard-mmo-lite" title="Permanent link">&para;</a></h3>
+<p>The world runs 24/7 on a server; players log in and out of an ongoing campaign. Mount &amp; Blade's
+<em>Persistent World</em> mod is the reference.</p>
+<p><strong>For:</strong> genuinely novel, huge long-tail potential.
+<strong>Against:</strong> a wholly different (and far larger) engineering project: server costs, persistence,
+offline vulnerability, griefing, and an economy that has to survive absentee players. <strong>Not a
+prototype.</strong></p>
+</div>
+<div class="opt">
+<h3 id="option-d-competitive-rival-necromancers-campaign-has-a-winner">Option D: Competitive (rival necromancers, campaign has a winner)<a class="headerlink" href="#option-d-competitive-rival-necromancers-campaign-has-a-winner" title="Permanent link">&para;</a></h3>
+<p>4-8 players race/fight to dominate a region; the campaign is a match with an end condition.</p>
+<p><strong>For:</strong> solves the "when does it end" problem and makes PvP a feature rather than a hazard.
+<strong>Against:</strong> PvP battles between two hordes is a <em>third</em> combat design problem on top of the two
+we already have, and balance becomes a permanent tax.</p>
+</div>
+<h2 id="time">The time model: still open<a class="headerlink" href="#time" title="Permanent link">&para;</a></h2>
+<div class="admonition danger">
+<p class="admonition-title">REOPENED 2026-07-26. This is a blocking question again.</p>
+<p>An activity-derived real-time clock was recorded as decided on 2026-07-25. It is <strong>back open</strong>:
+the project owner is not sure real-time is right, and a <strong>simultaneous-turn model</strong> in the style
+of <em>Total War: Warhammer 3</em> is now on the table as an equal candidate.</p>
+<p>The earlier decision stays in the <a href="../../project/decisions/">Decision Log</a> marked as reopened
+rather than deleted, because the reasoning behind it is still worth having.</p>
+</div>
+<h3 id="this-decision-is-smaller-than-it-looks">This decision is smaller than it looks<a class="headerlink" href="#this-decision-is-smaller-than-it-looks" title="Permanent link">&para;</a></h3>
+<p>Worth saying first, because it makes the choice less frightening: <strong>battles are real-time either
+way.</strong> Total War is turn-based on the campaign map and real-time in the fight, which is exactly the
+split this game already has. So this is purely an <strong>overworld-layer</strong> decision. Nothing on
+<a href="../../game/combat/">Horde Combat</a>, <a href="../../tech/unit-system/">Unit System</a> or the battle netcode
+changes whichever way it goes.</p>
+<div class="opt">
+<h3 id="option-a-simultaneous-turns-total-war-warhammer-3">Option A: simultaneous turns (Total War: Warhammer 3)<a class="headerlink" href="#option-a-simultaneous-turns-total-war-warhammer-3" title="Permanent link">&para;</a></h3>
+<p>Both players plan and move in the same turn. Each party has a <strong>march range</strong>, a movement budget it
+can spend. The turn resolves when both players commit, or a timer expires.</p>
+<p><strong>For, and the first point is a big one:</strong></p>
+<ul>
+<li><strong>It deletes the multiplayer time problem outright.</strong> No shared clock, no speed negotiation, no
+  "what is my friend doing while I fight", no <a href="../../tech/netcode/">tick-aligned timescale</a> risk. An
+  entire subsystem we designed stops needing to exist.</li>
+<li><strong>Overworld netcode becomes trivial.</strong> Send orders, resolve, sync at the turn boundary. No
+  continuous replication of a live world.</li>
+<li><strong>Battle length stops mattering.</strong> A 20-minute fight costs zero campaign time, so the 5-10 minute
+  budget we imposed on combat can relax.</li>
+<li><strong>Save/load is trivial</strong>, since state is clean at turn boundaries.</li>
+<li>Thinking time is free. You can plan a poisoning campaign without the world running on.</li>
+</ul>
+<p><strong>Against:</strong></p>
+<ul>
+<li><strong>Feature 2 says "Bannerlord-like overworld", and Bannerlord is real-time.</strong> This is the option
+  that most changes what was asked for.</li>
+<li><strong>Turn-waiting friction is real and well documented</strong> in Total War co-op campaigns. You wait on
+  your partner constantly.</li>
+<li><strong>Day/night as a mechanic weakens</strong>, since turns abstract time. The "undead are stronger at night"
+  idea gets much less interesting.</li>
+<li>Reinforcement becomes a <strong>range check at battle start</strong> rather than a live ride to your friend's
+  fight. Not lost, but far less dramatic.</li>
+</ul>
+</div>
+<div class="opt">
+<h3 id="option-b-real-time-activity-derived-speed-bannerlord">Option B: real-time, activity-derived speed (Bannerlord)<a class="headerlink" href="#option-b-real-time-activity-derived-speed-bannerlord" title="Permanent link">&para;</a></h3>
+<p>The previously-recorded model. World speed is inferred from what both players are doing: both
+stationary pauses, one moving runs 1x, both moving runs 3x, and either player in a battle forces 1x.
+Plus a shared HUD toggle that only applies when both players engage it.</p>
+<p><strong>For:</strong></p>
+<ul>
+<li><strong>Matches Feature 2 literally</strong>, and preserves the Bannerlord texture the pitch asked for.</li>
+<li><strong>The marquee co-op moment survives</strong>: you see your friend's fight on the map, you ride for it, you
+  arrive mid-battle as reinforcements.</li>
+<li><strong>Day/night is real gameplay</strong>, which gives the world clock a purpose.</li>
+<li>No turn-waiting. Nobody is ever blocked on their partner clicking End Turn.</li>
+<li>Interception on the road stays possible, which is good drama for a game about being hunted.</li>
+</ul>
+<p><strong>Against:</strong></p>
+<ul>
+<li>Requires the whole derived-speed system, a <code>Wait</code>/<code>Camp</code> action so waiting is not idling, and a
+  <strong>tick-aligned authoritative timescale</strong> or the two machines drift apart.</li>
+<li><strong>Battle length becomes a hard budget</strong>, because a long fight is live campaign time for your
+  partner.</li>
+<li>Settlement interaction must work with the world live, so no deep menu-diving.</li>
+<li>Continuous overworld replication, which is more netcode than Option A by a wide margin.</li>
+</ul>
+</div>
+<h3 id="what-each-does-to-the-campaign-arc">What each does to the campaign arc<a class="headerlink" href="#what-each-does-to-the-campaign-arc" title="Permanent link">&para;</a></h3>
+<p>Worth weighing, since <a href="../progression/">the arc</a> is now the spine of the game.</p>
+<p><strong>Acts 1 and 2 are sneaking, poisoning and scavenging.</strong> Real-time suits the <em>sneaking</em> (avoiding
+patrols, timing a move) while turns suit the <em>poisoning</em> (act, end turn, come back later for the
+bodies). Neither is obviously right, and this is probably the sharpest test available: whichever
+model makes "one skeleton hiding in a cellar" more tense is the one to take.</p>
+<h3 id="nothing-has-been-chosen">Nothing has been chosen<a class="headerlink" href="#nothing-has-been-chosen" title="Permanent link">&para;</a></h3>
+<p>Both options are live. The <a href="../../tech/netcode/">netcode</a> and
+<a href="../../game/overworld/">Campaign Overworld</a> pages currently assume Option B and will need revising if
+Option A is chosen. That revision is contained, because it is the overworld layer only.</p>
+<h2 id="knock-on-effects-to-work-through">Knock-on effects to work through<a class="headerlink" href="#knock-on-effects-to-work-through" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Map scale.</strong> Less constrained than it was: 3× travel compresses the dead time. Still shouldn't
+  be Calradia-sized. <strong>OPEN.</strong></li>
+<li><strong>Offline players.</strong> Does their territory decay? Get raided? Freeze? <strong>OPEN.</strong></li>
+<li><strong>Session length.</strong> With a live clock, what does a 2-hour session accomplish? Needs an answer
+  before the economy is tuned.</li>
+<li><strong>Reinforcement window.</strong> How long does a friend have to reach your battle? This is a real tuning
+  knob and probably the best feature in the model.</li>
+</ul>
+<h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../../tech/netcode/">Netcode Architecture</a>: the engineering side</li>
+<li><a href="../../game/overworld/">Campaign Overworld</a>: what the shared map actually is</li>
+<li><a href="../../project/poc-scope/">Prototype Scope</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../rituals/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Rituals">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Rituals
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../progression/" class="md-footer__link md-footer__link--next" aria-label="Next: Progression">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Progression
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "search.suggest", "search.highlight", "content.action.edit", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

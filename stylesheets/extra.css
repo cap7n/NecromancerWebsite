@@ -1,0 +1,60 @@
+/* Necromancer Design Wiki: dark crypt polish + status pills.
+   Mirrors the TowerDrop wiki styling, shifted violet/bone. */
+
+/* Deepen the slate (dark) background toward a near-black, violet-tinted void. */
+[data-md-color-scheme="slate"] {
+  --md-default-bg-color: #0d0b12;
+  --md-accent-fg-color: #9ee87a;
+}
+
+[data-md-color-scheme="slate"] .md-header {
+  background-color: #16121f;
+}
+
+/* Tighter, heavier headings for the "design deck" feel. */
+.md-typeset h1,
+.md-typeset h2 {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* -----------------------------------------------------------------
+   Status pills: used in the backlog legend and on every item.
+   Usage in markdown:  <span class="pill wip">WIP</span> ...
+   ----------------------------------------------------------------- */
+.pill {
+  display: inline-block;
+  padding: 0.05em 0.55em;
+  border-radius: 1em;
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1.5;
+  white-space: nowrap;
+  vertical-align: baseline;
+}
+.pill.done  { background: #1f6b3a33; color: #4cc27a; }  /* shipped / complete */
+.pill.wip   { background: #b8891733; color: #e0a53a; }  /* in progress */
+.pill.todo  { background: #55555533; color: #9aa0a6; }  /* not started */
+.pill.idea  { background: #5b46b933; color: #b3a4f2; }  /* undecided idea */
+.pill.check { background: #1f6b6b33; color: #52c4c4; }  /* may already be done */
+.pill.risk  { background: #b8341733; color: #e2645a; }  /* needs a decision */
+.pill.parked{ background: #44506633; color: #8fa3c4; }  /* shelved / deferred */
+
+/* -----------------------------------------------------------------
+   Option blocks: for pages that lay out A/B/C design choices.
+   Usage:  <div class="opt" markdown> ### Option A, ... </div>
+   ----------------------------------------------------------------- */
+.opt {
+  border-left: 3px solid #5b46b9;
+  padding: 0.1em 0 0.1em 1em;
+  margin: 1.2em 0;
+}
+.opt.rec { border-left-color: #9ee87a; }
+.opt .md-typeset h3,
+.opt h3 { margin-top: 0.4em; }
+
+/* Requirement provenance: MUST came from the designer, PROPOSED is a suggestion
+   awaiting sign-off. Keeping these visually distinct is the house rule made
+   visible: never let a proposal read as a decision. */
+.pill.must { background: #8a5a0033; color: #f2b64a; }
+.pill.prop { background: #3a3a5a33; color: #9aa8d8; }

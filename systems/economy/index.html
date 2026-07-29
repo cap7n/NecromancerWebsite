@@ -1,0 +1,1829 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Design wiki and single point of truth for Necromancer, a multiplayer necromancy campaign game, Bannerlord-style overworld, horde-control combat.">
+      
+      
+      
+        <link rel="canonical" href="https://cap7n.github.io/NecromancerWebsite/systems/economy/">
+      
+      
+        <link rel="prev" href="../../game/settlements/">
+      
+      
+        <link rel="next" href="../rituals/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Economy - Necromancer Design Wiki</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="light-green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#economy" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Necromancer Design Wiki" class="md-header__button md-logo" aria-label="Necromancer Design Wiki" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Necromancer Design Wiki
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Economy
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/cap7n/NecromancerWebsite" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Necromancer Design Wiki" class="md-nav__button md-logo" aria-label="Necromancer Design Wiki" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Necromancer Design Wiki
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/cap7n/NecromancerWebsite" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pillars/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Pillars
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/open-questions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ❓ Open Questions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/questionnaire/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📋 Design Questionnaire
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Game
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    The Game
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../game/necromancer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Necromancer (Player)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../game/overworld/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Campaign Overworld
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../game/combat/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Horde Combat
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../game/horde/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Horde (Units)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../game/settlements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Settlements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Systems
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Systems
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Economy
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Economy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#deep-in-decisions-shallow-in-simulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deep in decisions, shallow in simulation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-tension-you-farm-consequences" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The tension: you farm consequences
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#three-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Three resources
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Three resources">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-conversions-are-where-the-depth-lives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The conversions are where the depth lives
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#devotion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Devotion: the living pay for your control
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Devotion: the living pay for your control">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-it-is-worth-the-extra-resource" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why it is worth the extra resource
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-tensions-to-design-against" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The tensions to design against
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#does-it-replace-reagents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Does it replace Reagents?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#merge-devotion-is-the-only-upkeep" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Merge: Devotion is the only upkeep
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keep-both" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Keep both
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#decay-keeps-you-moving" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decay keeps you moving
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#buying-things-without-a-market" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Buying things without a market
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#multiplayer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Multiplayer
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rituals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rituals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../multiplayer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Multiplayer & Time
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../progression/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tech
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tech
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tech/engine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Engine & Tooling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tech/performance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Horde Scale & Performance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tech/unit-system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unit System Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tech/netcode/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Netcode Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tech/otr-carryover/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OTR Carry-Over
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tech/art-direction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Art Direction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Project
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/poc-scope/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prototype Scope (PoC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/backlog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backlog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/decisions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Decision Log
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Roadmap & Priorities
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/how-to-edit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to Edit This Wiki
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#deep-in-decisions-shallow-in-simulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deep in decisions, shallow in simulation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-tension-you-farm-consequences" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The tension: you farm consequences
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#three-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Three resources
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Three resources">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-conversions-are-where-the-depth-lives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The conversions are where the depth lives
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#devotion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Devotion: the living pay for your control
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Devotion: the living pay for your control">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-it-is-worth-the-extra-resource" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why it is worth the extra resource
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-tensions-to-design-against" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The tensions to design against
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#does-it-replace-reagents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Does it replace Reagents?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#merge-devotion-is-the-only-upkeep" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Merge: Devotion is the only upkeep
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keep-both" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Keep both
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#decay-keeps-you-moving" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decay keeps you moving
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#buying-things-without-a-market" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Buying things without a market
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#multiplayer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Multiplayer
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/cap7n/NecromancerWebsite/edit/main/docs/systems/economy.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="economy">Economy<a class="headerlink" href="#economy" title="Permanent link">&para;</a></h1>
+<p><strong>Feature 5: "deeper economy."</strong></p>
+<div class="admonition success">
+<p class="admonition-title">Scoped down 2026-07-26</p>
+<p><strong>We are not simulating a world economy.</strong> No goods flowing between towns, no supply and demand,
+no price curves, no trade routes to arbitrage. Bannerlord genuinely simulates that and it is an
+enormous system. See the <a href="../../project/decisions/">Decision Log</a>.</p>
+</div>
+<h2 id="deep-in-decisions-shallow-in-simulation">Deep in decisions, shallow in simulation<a class="headerlink" href="#deep-in-decisions-shallow-in-simulation" title="Permanent link">&para;</a></h2>
+<p>That distinction is the whole design, and it is worth stating plainly because "deeper economy" was a
+stated requirement and this page is cutting things.</p>
+<p>A simulated economy is <em>complicated</em>: many numbers moving, most of them invisible, and depth is
+claimed rather than felt. What actually makes an economy interesting is having <strong>choices that cost
+you something</strong>. One good tension beats twelve resource bars.</p>
+<p>So we keep the tension and throw away the simulation.</p>
+<h2 id="the-tension-you-farm-consequences">The tension: you farm consequences<a class="headerlink" href="#the-tension-you-farm-consequences" title="Permanent link">&para;</a></h2>
+<p>A normal strategy economy is extractive. Land makes grain, grain feeds soldiers.</p>
+<p>The necromancer's is <strong>parasitic</strong>. His one essential input, bodies, is produced by the living
+world's suffering: war, plague, famine, and simple population.</p>
+<blockquote>
+<p><strong>The living are livestock. You need them alive to keep producing.</strong></p>
+</blockquote>
+<p>Exterminate a region and its output goes to zero forever. Terrorise it <em>just enough</em> and it produces
+indefinitely. That is a predator and prey relationship rather than a gathering one, and it is the
+source of nearly every interesting decision in the campaign. Per <a href="../../pillars/">Pillar 4</a>, it has to
+be legible to the player early.</p>
+<h2 id="three-resources">Three resources<a class="headerlink" href="#three-resources" title="Permanent link">&para;</a></h2>
+<p>Down from five.</p>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Where it comes from</th>
+<th>What it's for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Corpses</strong></td>
+<td>Battles, graveyards, raids, plague. <strong>Perishable.</strong></td>
+<td>The raw body count. Becomes units directly.</td>
+</tr>
+<tr>
+<td><strong>Reagents</strong></td>
+<td>Bought through fronts and black markets, or grown in a converted <a href="../../game/settlements/">necropolis</a></td>
+<td><strong>Upkeep.</strong> Undead rot without them. The running cost of an army.</td>
+</tr>
+<tr>
+<td><strong>Anima</strong></td>
+<td>Killing the living personally or with intent. Rare, never bulk-farmable.</td>
+<td>Elites, named lieutenants, and the player's own power.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Dread is not a resource you carry</strong>, it is a property of a <em>place</em>: how cowed a given settlement
+is. It sits on the settlement, not in your inventory. That removes a stockpile without removing the
+mechanic.</p>
+<p><strong>Bone and Material are gone</strong>, folded into Corpses. The corpse-to-bone conversion was one step too
+many for what it added.</p>
+<p><strong>Gold barely exists.</strong> A lich cannot walk into a market, so money is only useful through fronts.</p>
+<h3 id="the-conversions-are-where-the-depth-lives">The conversions are where the depth lives<a class="headerlink" href="#the-conversions-are-where-the-depth-lives" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Corpses + Reagents make units.</strong> Reagents are the bottleneck, and they come from the <em>living</em>
+  economy. Your army's running cost is therefore paid by people who hate you.</li>
+<li><strong>Reagents drain continuously.</strong> An army is a materials cost, not a wage bill. Bigger horde,
+  faster burn. That is a natural size limiter that isn't an arbitrary party cap.</li>
+<li><strong>Anima is never bulk.</strong> It cannot be ground for, so elite power stays scarce by construction.</li>
+<li><strong>Dread against Prosperity</strong> is the sharpest tension in the design: dread extracts tribute <em>now</em>
+  but suppresses the settlement's output, which reduces future corpses and reagents. Every
+  short-term gain visibly eats the long-term supply.</li>
+</ul>
+<h2 id="devotion">Devotion: the living pay for your control<a class="headerlink" href="#devotion" title="Permanent link">&para;</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">PROPOSED 2026-07-26, not decided</p>
+<p>Proposed by the designer as a possible mechanic for <a href="../../pillars/">Pillar 3</a>. Written up here
+because it is unusually load-bearing: it turns two ratified pillars from statements of intent
+into rules the game enforces on its own.</p>
+</div>
+<p><strong>The idea:</strong> you collect living people who venerate you, and their devotion is what keeps the horde
+obedient. Undead have hit points <em>and</em> draw continuously on that pool. Run dry and they go
+<a href="../../game/combat/#the-feral-question">feral</a>. Recovering a feral unit costs Devotion, so if you are
+empty, <strong>you cannot get them back, and they stay a danger to you.</strong></p>
+<h3 id="why-it-is-worth-the-extra-resource">Why it is worth the extra resource<a class="headerlink" href="#why-it-is-worth-the-extra-resource" title="Permanent link">&para;</a></h3>
+<p><strong>It makes <a href="../../pillars/">Pillar 4</a> literal.</strong> "The living world is the supply chain" stops being a
+theme and becomes arithmetic: living people generate the thing that keeps your army from killing you.</p>
+<p><strong>It resolves the Act 4 contradiction.</strong> <a href="../../game/settlements/">Flagged</a> when the pillars were
+ratified: the arc ends in warlord conquest, but conquest means extermination, which Pillar 4 calls
+economic suicide. With Devotion, that stops being a design tension and becomes a <strong>loss condition</strong>.
+Kill everyone and you have no worshippers, no Devotion, no control, and your own horde turns on you.
+The pillar enforces itself, and the endgame is no longer "conquer the map" but "how much can I take
+while keeping enough alive to hold the leash."</p>
+<p><strong>It changes the raid verb.</strong> You stop raiding purely to kill and start raiding to <strong>take people
+alive</strong>. Capturing is a different action from slaughtering, and having both makes the strategic layer
+noticeably richer for very little work.</p>
+<p><strong>It makes a death spiral possible</strong>, which is dramatic and earned: over-raise, Devotion drains, some
+units go feral, the feral ones kill your worshippers, Devotion falls further, more go feral. That is
+a genuinely frightening failure cascade, and the player will have seen every step of it coming.</p>
+<h3 id="the-tensions-to-design-against">The tensions to design against<a class="headerlink" href="#the-tensions-to-design-against" title="Permanent link">&para;</a></h3>
+<div class="admonition danger">
+<p class="admonition-title">The death spiral needs a floor</p>
+<p>A cascade you cannot break out of is a cascade that makes people quit. There must be an exit:
+<strong>releasing or destroying your own undead to cut the drain</strong>, sacrificing worshippers for a burst
+of Devotion, or a hard minimum trickle. <em>Recommend the first: unmaking your own army to save
+yourself is a wonderfully thematic panic button.</em></p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Keep it out of the admin layer</p>
+<p>If worshippers are individuals to be housed, fed and managed, this becomes a colony sim.
+<em>Recommend: a single number per settlement</em>, in keeping with the
+<a href="../../game/settlements/">three-dials model</a>.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Tone: worshippers, not chattel</p>
+<p>Played straight, slave management is grim in a way that fights the
+<a href="../../tech/art-direction/">dark-comic tone</a>. <em>Recommend framing them as a </em><em>congregation</em><em>:
+deluded cultists, willing worshippers, a flock.</em> Funnier, more unsettling, and it makes
+"your followers pray to you" a joke that runs the whole campaign.</p>
+</div>
+<h3 id="does-it-replace-reagents">Does it replace Reagents?<a class="headerlink" href="#does-it-replace-reagents" title="Permanent link">&para;</a></h3>
+<p>Probably yes, and that keeps the resource list at three.</p>
+<div class="opt rec">
+<h3 id="merge-devotion-is-the-only-upkeep">Merge: Devotion is the only upkeep<a class="headerlink" href="#merge-devotion-is-the-only-upkeep" title="Permanent link">&para;</a></h3>
+<p>The living keep your undead both <strong>standing and obedient</strong>. One drain, one source, and Pillar 4
+becomes the single spine of the whole economy. Simpler, and much sharper.</p>
+</div>
+<div class="opt">
+<h3 id="keep-both">Keep both<a class="headerlink" href="#keep-both" title="Permanent link">&para;</a></h3>
+<p>Reagents for the body (rot), Devotion for the mind (control). Thematically distinct, but two upkeep
+drains is one more bar than the game needs and we just cut the list from five to three.</p>
+</div>
+<p><strong>Naming:</strong> <em>Devotion</em> is a working name and reads well against <strong>Anima</strong>. The symmetry is worth
+keeping: <strong>you take Anima from the dead, you receive Devotion from the living.</strong></p>
+<h3 id="decay-keeps-you-moving">Decay keeps you moving<a class="headerlink" href="#decay-keeps-you-moving" title="Permanent link">&para;</a></h3>
+<p>Corpses rot, Dread fades, undead fall apart without reagents. Almost nothing stockpiles safely. The
+player has to keep <em>acting</em> rather than hoarding, and time itself becomes pressure, which matters a
+lot given the <a href="../multiplayer/#time">live world clock</a>.</p>
+<h2 id="buying-things-without-a-market">Buying things without a market<a class="headerlink" href="#buying-things-without-a-market" title="Permanent link">&para;</a></h2>
+<p>A lich cannot shop. That constraint is content:</p>
+<ul>
+<li><strong>Fronts.</strong> A corrupted contact in a living settlement. One per settlement, discoverable and
+  burnable by the enemy.</li>
+<li><strong>Black markets and grave-robbers.</strong> The only places selling reagents and corpses openly, at
+  terrible rates.</li>
+</ul>
+<p>The trade game is therefore <strong>maintaining illicit access</strong>, not buying low and selling high. Much
+more thematic, and it generates overworld gameplay without a price simulation behind it.</p>
+<h2 id="multiplayer">Multiplayer<a class="headerlink" href="#multiplayer" title="Permanent link">&para;</a></h2>
+<p>Shared world, <strong>separate stockpiles</strong>, and trade between players. Worth designing toward
+deliberately: give the two players <em>asymmetric access</em> so trading each other is worthwhile rather
+than optional.</p>
+<div class="admonition warning">
+<p class="admonition-title">OPEN: the shared livestock problem</p>
+<p>If both players parasitise the same region they compete for a limited living population. Either
+great emergent tension or a friendship-ending frustration. Needs playtesting.</p>
+</div>
+<h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../../game/settlements/">Settlements</a> · <a href="../../game/horde/">The Horde</a> · <a href="../../game/overworld/">Campaign Overworld</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../../game/settlements/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Settlements">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Settlements
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../rituals/" class="md-footer__link md-footer__link--next" aria-label="Next: Rituals">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Rituals
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "search.suggest", "search.highlight", "content.action.edit", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

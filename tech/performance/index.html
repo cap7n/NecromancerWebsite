@@ -1,0 +1,2330 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Design wiki and single point of truth for Necromancer, a multiplayer necromancy campaign game, Bannerlord-style overworld, horde-control combat.">
+      
+      
+      
+        <link rel="canonical" href="https://cap7n.github.io/NecromancerWebsite/tech/performance/">
+      
+      
+        <link rel="prev" href="../engine/">
+      
+      
+        <link rel="next" href="../unit-system/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Horde Scale & Performance - Necromancer Design Wiki</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="light-green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#horde-scale-performance" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Necromancer Design Wiki" class="md-header__button md-logo" aria-label="Necromancer Design Wiki" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Necromancer Design Wiki
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Horde Scale & Performance
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/cap7n/NecromancerWebsite" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Necromancer Design Wiki" class="md-nav__button md-logo" aria-label="Necromancer Design Wiki" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Necromancer Design Wiki
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/cap7n/NecromancerWebsite" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pillars/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Pillars
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/open-questions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ❓ Open Questions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/questionnaire/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📋 Design Questionnaire
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Game
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    The Game
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../game/necromancer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Necromancer (Player)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../game/overworld/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Campaign Overworld
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../game/combat/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Horde Combat
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../game/horde/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Horde (Units)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../game/settlements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Settlements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Systems
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Systems
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systems/economy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Economy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systems/rituals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rituals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systems/multiplayer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Multiplayer & Time
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systems/progression/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tech
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tech
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../engine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Engine & Tooling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Horde Scale & Performance
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Horde Scale & Performance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#m0-results-measured-2026-07-26-spike-complete" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        M0 results: measured 2026-07-26 SPIKE COMPLETE
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="M0 results: measured 2026-07-26 SPIKE COMPLETE">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-the-numbers-say" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What the numbers say
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ladder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The optimisation ladder: how to go past 800
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#total-war" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Total War does, and the one trick we should steal
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What Total War does, and the one trick we should steal">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-trick-we-should-steal-and-its-a-big-one" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The trick we should steal, and it's a big one
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scattered-slots" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scattered slots: the option that gets us to thousands
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Scattered slots: the option that gets us to thousands">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-it-costs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What it costs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-netcode-payoff-is-possibly-bigger-than-the-cpu-one" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The netcode payoff is possibly bigger than the CPU one
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-to-decide" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When to decide
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#queue-bug" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The bug M0 found: a flow field alone makes a queue, not a horde
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#settling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Standing still: the horde needs a formation, just not while walking
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enemy-formations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The enemy is the cheap half of the budget
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixed-the-flow-field-rebuild-hitch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed: the flow-field rebuild hitch
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reproducing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reproducing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-architecture-in-one-line" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The architecture in one line
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#no-physics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        No physics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-corpse-field" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The corpse field
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#animation-is-the-real-cost" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Animation is the real cost
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#navigation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Navigation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#godot-specific-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Godot-specific rules
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#budgets-to-set-once-theres-a-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Budgets to set once there's a build
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../unit-system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unit System Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../netcode/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Netcode Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../otr-carryover/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OTR Carry-Over
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../art-direction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Art Direction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Project
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/poc-scope/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prototype Scope (PoC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/backlog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backlog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/decisions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Decision Log
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Roadmap & Priorities
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/how-to-edit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to Edit This Wiki
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#m0-results-measured-2026-07-26-spike-complete" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        M0 results: measured 2026-07-26 SPIKE COMPLETE
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="M0 results: measured 2026-07-26 SPIKE COMPLETE">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-the-numbers-say" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What the numbers say
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ladder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The optimisation ladder: how to go past 800
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#total-war" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Total War does, and the one trick we should steal
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What Total War does, and the one trick we should steal">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-trick-we-should-steal-and-its-a-big-one" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The trick we should steal, and it's a big one
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scattered-slots" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scattered slots: the option that gets us to thousands
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Scattered slots: the option that gets us to thousands">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-it-costs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What it costs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-netcode-payoff-is-possibly-bigger-than-the-cpu-one" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The netcode payoff is possibly bigger than the CPU one
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-to-decide" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When to decide
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#queue-bug" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The bug M0 found: a flow field alone makes a queue, not a horde
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#settling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Standing still: the horde needs a formation, just not while walking
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enemy-formations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The enemy is the cheap half of the budget
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixed-the-flow-field-rebuild-hitch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed: the flow-field rebuild hitch
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reproducing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reproducing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-architecture-in-one-line" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The architecture in one line
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#no-physics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        No physics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-corpse-field" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The corpse field
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#animation-is-the-real-cost" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Animation is the real cost
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#navigation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Navigation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#godot-specific-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Godot-specific rules
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#budgets-to-set-once-theres-a-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Budgets to set once there's a build
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/cap7n/NecromancerWebsite/edit/main/docs/tech/performance.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="horde-scale-performance">Horde Scale &amp; Performance<a class="headerlink" href="#horde-scale-performance" title="Permanent link">&para;</a></h1>
+<div class="admonition success">
+<p class="admonition-title">Decided 2026-07-25</p>
+<p><strong>~800 active agents</strong>: 200 undead per player (≈400 friendly), plus an enemy force of 200-400,
+plus a corpse field of <strong>3-5k records</strong>. Units are <strong>positional agents, not rigid bodies</strong>.
+Engine is <strong>Godot 4</strong>. See the <a href="../../project/decisions/">Decision Log</a>.</p>
+<p>The number is a target to push against and measure, not a guarantee. Everything below is how we
+intend to hit it.</p>
+</div>
+<h2 id="m0-results-measured-2026-07-26-spike-complete">M0 results: measured 2026-07-26 <span class="pill done">SPIKE COMPLETE</span><a class="headerlink" href="#m0-results-measured-2026-07-26-spike-complete" title="Permanent link">&para;</a></h2>
+<p><strong>GDScript holds 800 agents. No GDExtension port needed.</strong> The project's biggest technical risk is
+retired.</p>
+<p>Measured on an <strong>i9-13900K / RTX 4090</strong>. Headless, so these are CPU-only numbers; the 8 ms budget
+was always about CPU. Two masses of agents walking into each other
+through a walled gap, sampled <strong>at peak chokepoint density</strong>, 200 frames per case.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">agents</th>
+<th>threading</th>
+<th style="text-align: right;">hash</th>
+<th style="text-align: right;">separation</th>
+<th style="text-align: right;">integrate</th>
+<th style="text-align: right;"><strong>sim avg</strong></th>
+<th style="text-align: right;"><strong>sim p95</strong></th>
+<th style="text-align: right;">multimesh</th>
+<th>verdict</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">400</td>
+<td>single</td>
+<td style="text-align: right;">0.83</td>
+<td style="text-align: right;">1.21</td>
+<td style="text-align: right;">0.21</td>
+<td style="text-align: right;"><strong>2.25</strong></td>
+<td style="text-align: right;"><strong>3.23</strong></td>
+<td style="text-align: right;">0.15</td>
+<td>✅ PASS</td>
+</tr>
+<tr>
+<td style="text-align: right;">400</td>
+<td>×8</td>
+<td style="text-align: right;">0.60</td>
+<td style="text-align: right;">0.75</td>
+<td style="text-align: right;">0.15</td>
+<td style="text-align: right;"><strong>1.50</strong></td>
+<td style="text-align: right;"><strong>1.74</strong></td>
+<td style="text-align: right;">0.11</td>
+<td>✅ PASS</td>
+</tr>
+<tr>
+<td style="text-align: right;"><strong>800</strong></td>
+<td><strong>single</strong></td>
+<td style="text-align: right;">0.70</td>
+<td style="text-align: right;">2.60</td>
+<td style="text-align: right;">0.31</td>
+<td style="text-align: right;"><strong>3.60</strong></td>
+<td style="text-align: right;"><strong>4.02</strong></td>
+<td style="text-align: right;">0.23</td>
+<td>✅ <strong>PASS</strong></td>
+</tr>
+<tr>
+<td style="text-align: right;"><strong>800</strong></td>
+<td><strong>×8</strong></td>
+<td style="text-align: right;">0.69</td>
+<td style="text-align: right;">1.65</td>
+<td style="text-align: right;">0.30</td>
+<td style="text-align: right;"><strong>2.63</strong></td>
+<td style="text-align: right;"><strong>2.94</strong></td>
+<td style="text-align: right;">0.22</td>
+<td>✅ <strong>PASS</strong></td>
+</tr>
+<tr>
+<td style="text-align: right;">1600</td>
+<td>single</td>
+<td style="text-align: right;">0.87</td>
+<td style="text-align: right;">7.33</td>
+<td style="text-align: right;">0.62</td>
+<td style="text-align: right;"><strong>8.82</strong></td>
+<td style="text-align: right;"><strong>10.09</strong></td>
+<td style="text-align: right;">0.46</td>
+<td>❌ OVER</td>
+</tr>
+<tr>
+<td style="text-align: right;">1600</td>
+<td>×8</td>
+<td style="text-align: right;">0.85</td>
+<td style="text-align: right;">4.43</td>
+<td style="text-align: right;">0.58</td>
+<td style="text-align: right;"><strong>5.86</strong></td>
+<td style="text-align: right;"><strong>6.67</strong></td>
+<td style="text-align: right;">0.44</td>
+<td>✅ PASS</td>
+</tr>
+<tr>
+<td style="text-align: right;">3200</td>
+<td>×8</td>
+<td style="text-align: right;">1.17</td>
+<td style="text-align: right;">12.20</td>
+<td style="text-align: right;">1.15</td>
+<td style="text-align: right;"><strong>14.51</strong></td>
+<td style="text-align: right;"><strong>16.56</strong></td>
+<td style="text-align: right;">0.88</td>
+<td>❌ OVER</td>
+</tr>
+</tbody>
+</table>
+<p><em>(all figures in milliseconds)</em></p>
+<p><strong>In the actual running build</strong>, on the same machine: <strong>800 agents at ~120 fps in third person and
+~235 fps overhead.</strong> The 60 fps target has a lot of room under it.</p>
+<h3 id="what-the-numbers-say">What the numbers say<a class="headerlink" href="#what-the-numbers-say" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>800 passes with room to spare, and 1600 now passes threaded.</strong> The earlier "1600 fails even
+  threaded" result was measured <em>before</em> the crowd-spreading fix below: packing density, not agent
+  count, was the real cost driver. 3200 remains out of reach without the
+  <a href="#ladder">optimisation ladder</a>.</li>
+<li><strong>Separation is ~72% of the cost and tracks local DENSITY, not agent count.</strong> This is the single
+  most useful thing M0 taught us: <em>clumping is what costs money.</em> A spread-out horde of 1600 is
+  cheaper than a tightly packed 800. Every performance lever should therefore be aimed at density,
+  not headcount. Hash and integrate are nearly free and scale linearly.</li>
+<li><strong>Benchmark at peak density or don't bother.</strong> An early run with a 30-frame warm-up caught the
+  masses still strolling across open ground and reported 2.26 ms at 800: roughly 2.6× optimistic.
+  Any future crowd benchmark must sample when the crowd is actually jammed together.</li>
+<li><strong>Threading the separation pass gives ~1.5×</strong>, and it is what takes 1600 from OVER to PASS. Not
+  needed at 800: keep it available, default off, per the CoW caveat in <code>agent_sim.gd</code>.</li>
+<li><strong>Matching hash cell size to separation radius</strong> (1.5 → 1.2) bought ~12% at 800 and ~22% at 1600.
+  A wider cell scans dead area; candidate count scales with cell area.</li>
+<li><strong>MultiMesh write is a non-issue</strong> at 0.23 ms, writing only the six floats per agent that change.</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">One caveat that still matters</p>
+<p><strong>Headless means no GPU render, no game logic, no netcode.</strong> At 60 fps the whole frame is
+16.67 ms. A 4.02 ms sim leaves ~12 ms for everything else: comfortable, but combat, the corpse
+field and replication all still have to fit in it.</p>
+<p>The mid-range-CPU question is now a <strong>deliberate non-goal</strong>: see the
+<a href="../../project/decisions/">hardware-target decision</a>. Threading exists as the lever if it's ever
+wanted.</p>
+</div>
+<h3 id="ladder">The optimisation ladder: how to go past 800<a class="headerlink" href="#ladder" title="Permanent link">&para;</a></h3>
+<p>Nothing below is built. It's recorded so "800" is understood as <em>today's</em> number with a known route
+upward, rather than a permanent cap. <strong>Separation is ~72% of sim cost and tracks density</strong>, so every
+rung attacks one or the other.</p>
+<p>Ordered cheapest-first:</p>
+<ol>
+<li><strong>Temporal LOD (time-slicing).</strong> Update separation for 1/N of the agents each frame, round-robin.
+   Separation is a smoothing force: running it at 15-20 Hz instead of 60 Hz is invisible even up
+   close. Roughly a <strong>3-4× win for a few dozen lines</strong>, and it's the <em>safest</em> rung because it
+   degrades uniformly everywhere (see the multiplayer caveat below).</li>
+<li><strong>Distance-based simulation LOD.</strong> Far agents skip neighbour queries entirely and just follow the
+   flow field. They'll interpenetrate, but at distance that's invisible. Combines multiplicatively
+   with (1).</li>
+<li><strong>Symmetric pairs.</strong> Compute each pair once and apply ±force to both, instead of computing every
+   pair twice. A clean <strong>~2×</strong> on the separation pass. Costs the current threading model: parallel
+   chunks would need per-thread accumulation buffers.</li>
+<li><strong>Ghost tier.</strong> Extreme-distance agents demote to position-only records with no separation at all,
+   promoting back when a player nears. <strong>OTR already implements exactly this</strong>
+   (<code>horde_manager</code>, 300 m promote / 400 m demote with a hysteresis gap): see
+   <a href="../otr-carryover/">OTR Carry-Over</a>.</li>
+<li><strong>GDExtension.</strong> Still the escape hatch, still unnecessary. The <code>Scripts/Sim/</code> boundary keeps it a
+   contained job.</li>
+</ol>
+<p>Rungs 1, 2 and 4 are all forms of the same idea: <strong>LOD the <em>simulation</em>, not just the visuals.</strong> The
+third-person camera makes this especially attractive: the player sees a cone, and most of the field
+is behind them or far away.</p>
+<div class="admonition danger">
+<p class="admonition-title">LOD must key off nearest-player distance, NOT the local camera</p>
+<p>This is the trap, and it's specific to our <a href="../netcode/">split-authority netcode</a>. Each machine
+simulates the units it owns and ships positions to the other. If <em>my</em> machine cheapens <em>my</em>
+units because they're far from <em>my</em> camera, while they're directly in front of <em>your</em> camera -
+you watch a mass of units interpenetrating and juddering.</p>
+<p><strong>Distance LOD must be computed against the nearest of <em>all</em> players</strong>, exactly as OTR's
+<code>horde_manager</code> does with its cached <code>_player_positions</code> list. Temporal LOD (rung 1) doesn't
+have this problem at all, which is another reason to do it first.</p>
+</div>
+<h3 id="total-war">What Total War does, and the one trick we should steal<a class="headerlink" href="#total-war" title="Permanent link">&para;</a></h3>
+<p>Worth answering directly, because the honest answer reframes our numbers.</p>
+<div class="admonition note">
+<p class="admonition-title">Confidence</p>
+<p>The two mechanisms below are well established from the series' GDC talks and are plainly visible
+in the games. Exact LOD tiers and internals are not something we should assume: treat the
+principles as solid and the specifics as unverified.</p>
+</div>
+<p><strong>1. Formations are the optimisation.</strong> Total War's unit of simulation is the <strong>regiment</strong>
+(~100-160 men), not the man. A regiment has a position, facing and formation shape; each soldier's
+position is largely <em>derived</em>: <code>regiment_origin + slot_offset</code>. So a 6,000-man battle simulates
+~40 regiments, and marching soldiers run <strong>no neighbour queries at all</strong>, because they aren't
+avoiding each other, they're holding a slot.</p>
+<p>A formation is, in effect, a <strong>compression scheme</strong>: one position plus a slot table instead of N
+independent positions.</p>
+<blockquote>
+<p><strong>This is precisely the thing our design deliberately throws away.</strong> "Horde control, not
+formations" means sloppy, emergent, individually-positioned mass, so we pay full per-agent price
+where Total War pays almost nothing. Our 800 versus their thousands is not us being worse at
+engineering; it's the bill for the product. Worth accepting knowingly.</p>
+</blockquote>
+<p><strong>2. Melee is resolved as locked pairs, not continuous collision.</strong> When two regiments clash,
+soldiers are matched into 1v1 duels playing synchronised paired animations. Once paired they're
+<strong>pinned in place</strong>: no pathfinding, no separation, just an animation state machine. It's why Total
+War melee reads as a churning mat of duelling pairs.</p>
+<h4 id="the-trick-we-should-steal-and-its-a-big-one">The trick we should steal, and it's a big one<a class="headerlink" href="#the-trick-we-should-steal-and-its-a-big-one" title="Permanent link">&para;</a></h4>
+<p><strong>Agents locked in melee don't need separation.</strong> They need to stand still and hit each other.</p>
+<p>Look at where our cost actually is: peak load is 4.11 ms at 800, ~3× open-ground cost, and it occurs
+exactly when both masses jam into the chokepoint. But <strong>in the real game, those agents would be
+fighting</strong>: and a fighting agent is stationary and paired.</p>
+<p>So if "engaged in melee" becomes a state that <strong>skips the separation query entirely</strong>, the worst case
+stops being the worst case. Densely packed <em>combat</em> would cost <em>less</em> than open-field movement, not
+three times more. <strong>That inverts the entire cost curve</strong>, and it's the highest-value optimisation on
+this page: bigger than anything on the <a href="#ladder">ladder</a>, because it removes work rather than
+amortising it.</p>
+<p>It also costs nothing aesthetically: locked, grinding melee is exactly what a horde crush should look
+like, and it <em>fixes</em> the predicted interpenetration problem in the same move: engaged agents hold
+position instead of being shoved through each other by separation forces.</p>
+<p><strong>Caveat:</strong> this can't be measured until M1/M2, when agents can actually fight. Until then the 800
+figure stands as the honest no-combat number. But it means the <em>combat</em> build may well be cheaper
+than this spike, which is the opposite of the usual direction.</p>
+<h3 id="scattered-slots">Scattered slots: the option that gets us to thousands<a class="headerlink" href="#scattered-slots" title="Permanent link">&para;</a></h3>
+<p>Total War: Warhammer's <strong>undead units are formations with scattered slots.</strong> Zombies and skeletons
+shamble in a loose, ragged mob, and underneath they're still a regiment with a slot table. The
+compression is intact; only the <em>slot offsets</em> are jittered and the spacing loosened.</p>
+<p>That's the important observation, because it means:</p>
+<blockquote>
+<p><strong>Formation compression and "sloppy horde" appearance are orthogonal.</strong> We assumed we had to pay
+full per-agent price to get the look. We don't.</p>
+</blockquote>
+<h4 id="the-model">The model<a class="headerlink" href="#the-model" title="Permanent link">&para;</a></h4>
+<ul>
+<li>A <strong>clump</strong> has an origin, a facing, and a slot table with <strong>jittered offsets</strong>.</li>
+<li>An agent's rest position is <code>clump_origin + slot_offset</code>: derived, ~free, no neighbour query.</li>
+<li>An agent's actual position is its rest position <strong>plus a deviation</strong>.</li>
+<li><strong>Deviation is what disturbances create</strong>: spell impulses, enemy contact, terrain. It decays back
+  toward the slot over time: a spring, essentially.</li>
+</ul>
+<p>So the sim is <strong>cheap when calm and expensive only where something is happening</strong>, which is exactly
+where the cost <em>should</em> go. It also composes with everything above: melee-locked agents simply stop
+returning to slot.</p>
+<p>Crucially, clumps would be <strong>emergent, not authored</strong>: agents heading for the same rally point form
+one. The player never selects, names, or shapes a clump.</p>
+<h4 id="what-it-costs">What it costs<a class="headerlink" href="#what-it-costs" title="Permanent link">&para;</a></h4>
+<p><strong>Emergent local behaviour.</strong> A slot-derived agent doesn't individually flow around an obstacle,
+doesn't pile organically at a chokepoint, doesn't find its own way through a gap. Some of that comes
+back via the deviation term, but not all of it. The mass becomes <em>choreographed-then-disturbed</em>
+rather than <em>genuinely emergent</em>.</p>
+<p>Whether that's a real loss or an invisible one is a <strong>question for the eye, not the spreadsheet</strong> -
+and it's the same question as <a href="../../project/open-questions/#q14">Q14</a>.</p>
+<div class="admonition tip">
+<p class="admonition-title">This is not a violation of 'no formations'</p>
+<p><a href="../../game/combat/">Horde Combat</a> rejects <strong>formations as a control abstraction</strong>: no unit
+selection, no shapes, no facings, no command tree. It says nothing about <strong>formations as a
+spatial compression</strong>, which is an implementation detail the player never sees or touches.
+Borrowing RTS machinery under the hood is fine as long as it never surfaces in the control scheme
+or the silhouette.</p>
+</div>
+<h4 id="the-netcode-payoff-is-possibly-bigger-than-the-cpu-one">The netcode payoff is possibly bigger than the CPU one<a class="headerlink" href="#the-netcode-payoff-is-possibly-bigger-than-the-cpu-one" title="Permanent link">&para;</a></h4>
+<p>Replicate <strong>clump origin + seed</strong> instead of per-agent positions and bandwidth collapses from
+~8 bytes × N to ~16 bytes × <em>clump count</em>. Deviating agents still need individual updates, but
+deviation is rare and local, and <strong>OTR's dirty-flag delta sync already handles exactly this shape</strong>:
+quiet entities cost zero bandwidth, disturbed ones cost a packet. See
+<a href="../otr-carryover/">OTR Carry-Over</a>.</p>
+<p>That may be what makes 2,000+ agents viable <em>in multiplayer specifically</em>, where the per-agent wire
+cost bites hardest.</p>
+<h4 id="when-to-decide">When to decide<a class="headerlink" href="#when-to-decide" title="Permanent link">&para;</a></h4>
+<p><strong>Not now.</strong> It's a real architectural commitment with a real trade, and two cheaper things come
+first: answer <a href="../../project/open-questions/#q14">Q14</a> (if 300 reads as a horde, none of this
+matters), and measure melee-lock in M2. Keep it as the known route to thousands if we ever want them.</p>
+<h3 id="queue-bug">The bug M0 found: a flow field alone makes a queue, not a horde<a class="headerlink" href="#queue-bug" title="Permanent link">&para;</a></h3>
+<p><strong>The most valuable thing this spike produced.</strong> A ground-level screenshot showed what looked like a
+solid <em>wall</em> of agents. Rather than guess, the spike grew a <code>-- diag</code> mode that prints a coarse
+occupancy map, because "traffic jam" and "broken transform buffer" look identical from eye level.</p>
+<p>The verdict was neither. With 800 agents the crowd had collapsed into a <strong>4-metre-wide column</strong>
+(<code>x ∈ [-1.0, 3.0]</code>) running 90 m north-south. A single-file queue.</p>
+<p><strong>Cause:</strong> every agent samples the <em>same</em> flow field toward the <em>same</em> goal, so all 800 walk the
+identical centreline. Separation pushes back until it balances the field pulling them in, and that
+equilibrium is 4 m. Nothing was broken: the design was simply wrong.</p>
+<p><strong>Fix:</strong> each agent gets a <strong>persistent lateral bias</strong> in [-1, 1], applied as a perpendicular
+component of the flow direction (<code>lateral_spread</code>, currently 0.85). They fan into a front and
+converge only where geometry forces it. Extent went <strong>4 m → 55 m wide</strong>, and the shape reads as two
+armies advancing rather than two queues.</p>
+<div class="admonition tip">
+<p class="admonition-title">The fix for the look was also the fix for the frame time</p>
+<p>Spreading the crowd cut separation cost by ~37% at 800 (4.11 → 2.60 ms) and took <strong>1600 from
+failing to passing</strong>. Because separation tracks local density, <em>anything that stops the horde
+balling up is a performance optimisation as well as a visual one.</em> Keep this in mind for the
+combat design: a mechanic that encourages tight clumping is expensive twice over.</p>
+</div>
+<p>This is also a preview of the <a href="#scattered-slots">scattered-slot model</a>: a per-agent persistent offset
+is a poor man's slot table.</p>
+<h3 id="settling">Standing still: the horde needs a formation, just not while walking<a class="headerlink" href="#settling" title="Permanent link">&para;</a></h3>
+<p>A horde that <em>stops</em> still has to arrange itself. Three bugs surfaced while building that, each
+invisible until measured:</p>
+<p><strong>1. The goal was a density singularity.</strong> The flow field walks every agent onto the single goal
+cell, manufacturing the worst possible packing right where the crowd gathers, and separation cost
+tracks density. Fixed with an <strong>arrival radius</strong>: an agent stops once its <em>path</em> distance to the goal
+(read from the flow field's cost grid, so walls are handled for free) drops below a threshold that
+<strong>scales with crowd size</strong>. A bigger horde makes a <em>wider</em> blob, not a denser one.</p>
+<p><strong>2. Agents were stranding inside walls.</strong> With no physics there was no collision, so the lateral
+bias walked agents into blocked cells: where flow direction is zero and cost is infinite, so they
+sat there permanently. It looked like a settling failure (a "blob radius" of 64 m for 100 agents,
+which is exactly the wall-to-goal distance). Fixed with <strong>per-axis movement resolution</strong> so agents
+slide along geometry, plus an <strong>escape direction</strong> baked into blocked cells so anything that does get
+inside can walk out.</p>
+<p><strong>3. Separation cancels in a uniform crowd.</strong> A linear <code>(r−d)/r</code> repulsion sums to ~zero for an agent
+surrounded on all sides, so a compressed blob's interior can never push itself apart: 93% of agents
+were interpenetrating and stayed that way. Fixed by weighting the force <strong>1/d</strong> (clamped), so a very
+close pair dominates whatever else is around. Local overlaps now always resolve.</p>
+<p>Measured after all three (clipping = bodies actually intersecting, at the 0.55 m body width):</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">agents</th>
+<th style="text-align: right;">blob radius</th>
+<th style="text-align: right;">mean speed</th>
+<th style="text-align: right;">clipping</th>
+<th style="text-align: right;">worst clip</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">6.8 m</td>
+<td style="text-align: right;">0.17 m/s</td>
+<td style="text-align: right;"><strong>0.0%</strong></td>
+<td style="text-align: right;">0.00 m</td>
+</tr>
+<tr>
+<td style="text-align: right;">400</td>
+<td style="text-align: right;">14.0 m</td>
+<td style="text-align: right;">0.22 m/s</td>
+<td style="text-align: right;"><strong>7.0%</strong></td>
+<td style="text-align: right;">0.11 m</td>
+</tr>
+<tr>
+<td style="text-align: right;"><strong>800</strong></td>
+<td style="text-align: right;"><strong>19.5 m</strong></td>
+<td style="text-align: right;"><strong>0.31 m/s</strong></td>
+<td style="text-align: right;"><strong>20.8%</strong></td>
+<td style="text-align: right;"><strong>0.22 m</strong></td>
+</tr>
+<tr>
+<td style="text-align: right;">1600</td>
+<td style="text-align: right;">27.3 m</td>
+<td style="text-align: right;">0.39 m/s</td>
+<td style="text-align: right;">56.2%</td>
+<td style="text-align: right;">0.25 m</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Honest read:</strong> clean to 400, acceptable at the 800 target (worst overlap 0.22 m on a 0.55 m body),
+and poor at 1600: where the crowd arrives through a chokepoint over a long window and compresses
+faster than it can relax. That last one is tuning, not structure, and <strong><a href="#total-war">melee-lock</a>
+will change it entirely</strong> since fighting agents hold position instead of being shoved.</p>
+<p><strong>Cost:</strong> wall collision added ~0.5 ms to the integrate pass at 800 (0.31 → 0.79 ms). Worth it: the
+alternative was agents walking into geometry. 800 still passes at <strong>4.13 ms avg / 4.52 ms p95</strong>.</p>
+<h3 id="enemy-formations">The enemy is the cheap half of the budget<a class="headerlink" href="#enemy-formations" title="Permanent link">&para;</a></h3>
+<p>The living enemy fights in <strong>disciplined formations</strong>: which is thematically the point (order versus
+chaos) and, conveniently, is the <a href="#total-war">Total War compression</a> handed to us for free:</p>
+<ul>
+<li>A formation's soldiers are <code>formation_origin + slot_offset</code>. <strong>Slots guarantee non-overlap by
+  construction</strong>, so troops holding ranks need <em>no neighbour queries at all</em>: not even while the
+  formation marches, since the origin moves and the offsets don't.</li>
+<li>Separation is only needed <strong>between</strong> formations, and between formation troops and the horde.</li>
+</ul>
+<p>So the two sides of a battle have wildly asymmetric cost. Rough shape: a formation soldier is
+somewhere near a tenth of the price of a horde agent. <strong>The ~800 budget is not 400-vs-400</strong>: it's
+more like <em>400 horde + a considerably larger enemy force</em>, or the same enemy force with the savings
+spent on more undead.</p>
+<p>This should be measured properly during M2 rather than assumed, but it means the enemy side is
+close to free, and the design shouldn't budget as though a soldier and a skeleton cost the same.</p>
+<h3 id="fixed-the-flow-field-rebuild-hitch">Fixed: the flow-field rebuild hitch<a class="headerlink" href="#fixed-the-flow-field-rebuild-hitch" title="Permanent link">&para;</a></h3>
+<p>Rebuild costs ~40 ms at a 100×100 grid: two dropped frames, triggered on <strong>every rally-point move</strong>.
+Now <strong>runs on a <code>WorkerThreadPool</code> task</strong>, writing into back buffers that nothing else reads, with the
+finished field swapped in on the main thread. The sim keeps sampling the previous gradient for a few
+frames, which is invisible; a stutter would not have been. Repeated clicks collapse to at most one
+queued rebuild rather than a backlog.</p>
+<h3 id="reproducing">Reproducing<a class="headerlink" href="#reproducing" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>Godot_v4.7-stable_win64_console.exe<span class="w"> </span>--headless<span class="w"> </span>res://Scenes/M0/agent_spike.tscn<span class="w"> </span>--<span class="w"> </span>bench
+</code></pre></div>
+<p>Interactive: run the project. <code>1</code>/<code>2</code>/<code>3</code>/<code>4</code> set agent count, <code>T</code> toggles threading, left-click
+moves the green goal, right-click fires a scatter impulse, <code>WASD</code>/wheel move the camera. The overlay
+breaks down ms per subsystem: build the instrument first, always.</p>
+<hr />
+<h2 id="the-architecture-in-one-line">The architecture in one line<a class="headerlink" href="#the-architecture-in-one-line" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>Units are indices into flat arrays, drawn by MultiMesh, animated on the GPU, steered by a flow
+field, separated by a spatial hash, and never touched by the physics engine.</strong></p>
+</blockquote>
+<p>Every part of that is load-bearing. Drop any one and the target is out of reach.</p>
+<h2 id="no-physics">No physics<a class="headerlink" href="#no-physics" title="Permanent link">&para;</a></h2>
+<p>Agents carry a position and a velocity. Separation is neighbour repulsion computed from a spatial
+hash. Spells apply an <strong>impulse</strong> (<code>vel += impulse</code>, decayed over a few frames), which is what gives
+a shockwave the feel of scattering a crowd without a solver being involved.</p>
+<p><strong>What we give up:</strong> ragdolls, dismemberment, physics-driven siege. Deaths are a canned tip-over into
+a corpse record.</p>
+<p><strong>What we gain besides speed:</strong> the simulation is cheap to reason about, and a mass of agents under
+separation forces genuinely <em>looks</em> better than 800 capsules jostling: you get flow instead of
+grinding.</p>
+<p><strong>The first thing that will look wrong:</strong> units visibly overlapping when a mass compresses into a
+chokepoint. Without physics there's nothing hard-stopping interpenetration. Separation tuning is the
+mitigation; expect to spend real time on it, and expect it to be the most-noticed visual flaw in
+the first playable build.</p>
+<h2 id="the-corpse-field">The corpse field<a class="headerlink" href="#the-corpse-field" title="Permanent link">&para;</a></h2>
+<p>The unusual requirement, and <em>easier</em> than it would have been with physics: there's no rigidbody
+phase to absorb (unlike TowerDrop's coin pile, which had to settle real physics bodies first).</p>
+<ol>
+<li>A unit dies → canned tip-over animation, still a normal agent, for a second or two.</li>
+<li>It settles → <strong>converted to a corpse record</strong>: position, quality (what it was in life), faction,
+   decay timer. Agent slot freed and reused.</li>
+<li>Corpse records live in a <strong>spatial hash</strong>. The <a href="../../game/combat/">Feed</a> verb is a radius query
+   against that hash, not a scene-tree search.</li>
+<li>Re-raise → promote a record back into an agent slot.</li>
+</ol>
+<p>Corpses are rendered as a second MultiMesh. Per-corpse cost is a struct and one instance transform,
+so 3-5k of them is affordable. <strong>This is the single most important system in the game</strong> and should
+be built first (<a href="../../project/poc-scope/">M1</a>).</p>
+<h2 id="animation-is-the-real-cost">Animation is the real cost<a class="headerlink" href="#animation-is-the-real-cost" title="Permanent link">&para;</a></h2>
+<p>800 skinned meshes will kill the frame budget long before the AI does. The answer is <strong>vertex
+animation textures</strong>: bake each animation clip into a texture, sample it in the vertex shader by
+instance ID and time offset. Per-unit CPU cost goes to zero and everything draws in a handful of
+calls.</p>
+<p>This is the one piece of tech that has to be right, and it's a natural extension of TowerDrop's
+MultiMesh work. Budget real time for the bake pipeline.</p>
+<h2 id="navigation">Navigation<a class="headerlink" href="#navigation" title="Permanent link">&para;</a></h2>
+<p><strong>Flow fields, not per-agent pathfinding.</strong> One field computed per rally point over a grid; each
+agent samples the field at its position and adds separation. Cheap, and it produces the mass-flow
+look we actually want: 800 individuals each solving A* would be both slower and worse.</p>
+<p>Explicitly <strong>not</strong> using Godot's <code>NavigationAgent3D</code> or its built-in RVO avoidance.</p>
+<h2 id="godot-specific-rules">Godot-specific rules<a class="headerlink" href="#godot-specific-rules" title="Permanent link">&para;</a></h2>
+<p>Per the <a href="../../project/decisions/">engine decision</a>, Godot only works here if we decline three of its
+conveniences:</p>
+<ol>
+<li><strong>No node per unit.</strong> Agents are indices into packed arrays, updated in one loop. Not <code>Node3D</code>s.</li>
+<li><strong>No <code>NavigationAgent3D</code>.</strong> Flow field + spatial hash, as above.</li>
+<li><strong>No high-level multiplayer.</strong> See <a href="../netcode/">Netcode</a>.</li>
+</ol>
+<p><strong>Known risk:</strong> GDScript may not hold 800 agents × neighbour queries per frame. Plan: build it in
+GDScript with a spatial hash, <strong>measure early</strong>, and if it doesn't hold, port <em>only the hot loop</em> to
+GDExtension (Rust or C++). Design the agent simulation as a swappable module from day one so that
+port stays cheap and contained.</p>
+<h2 id="budgets-to-set-once-theres-a-build">Budgets to set once there's a build<a class="headerlink" href="#budgets-to-set-once-theres-a-build" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Frame budget split: agent sim / flow field / rendering / netcode.</li>
+<li>Corpse decay rate: the only thing bounding corpse-field growth in a long fight.</li>
+<li>LOD by distance <em>and</em> importance: distant chaff can be crude; the twenty units around the player
+  carry the fidelity.</li>
+</ul>
+<h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../netcode/">Netcode Architecture</a> · <a href="../../game/combat/">Horde Combat</a> · <a href="../art-direction/">Art Direction</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../engine/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Engine &amp; Tooling">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Engine & Tooling
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../unit-system/" class="md-footer__link md-footer__link--next" aria-label="Next: Unit System Design">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Unit System Design
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "search.suggest", "search.highlight", "content.action.edit", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
